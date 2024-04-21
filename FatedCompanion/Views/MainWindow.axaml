@@ -1,0 +1,118 @@
+<Window 
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:vm="using:Fated_Companion.ViewModels"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:views="clr-namespace:Fated_Companion.Views"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+  x:Class="Fated_Companion.Views.MainWindow"
+  Icon="/Assets/avalonia-logo.ico"
+  Title="Fated: The Game Companion App"
+  MinHeight="450"
+  MinWidth="800"
+  Background="Transparent"
+  WindowStartupLocation="CenterScreen"
+  ExtendClientAreaToDecorationsHint="True"
+  ExtendClientAreaChromeHints="NoChrome"
+  ExtendClientAreaTitleBarHeightHint="0"
+  SystemDecorations="None">
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="BackgroundBrush">#FF1E1E1E</SolidColorBrush>
+          <SolidColorBrush x:Key="MidGroundBrush">Gray</SolidColorBrush>
+          <SolidColorBrush x:Key="ForeGroundBrush">White</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentBrush">IndianRed</SolidColorBrush>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="BackgroundBrush">White</SolidColorBrush>
+          <SolidColorBrush x:Key="MidGroundBrush">Gray</SolidColorBrush>
+          <SolidColorBrush x:Key="ForeGroundBrush">Black</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentBrush">Blue</SolidColorBrush>
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+  <Window.Styles>
+    <Style Selector="Label.FatedFont">
+      <Setter Property="FontFamily" Value="{StaticResource AmiRFont}"/>
+      <Setter Property="FontSize" Value="20"/>
+      <Setter Property="FontWeight" Value="ExtraBold"/>
+    </Style>
+    <Style Selector="TextBlock.FatedFont">
+      <Setter Property="FontFamily" Value="{StaticResource AmiRFont}"/>
+      <Setter Property="FontSize" Value="20"/>
+      <Setter Property="FontWeight" Value="ExtraBold"/>
+    </Style>
+    <Style Selector="TabControl.HiddenTabs WrapPanel">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+  </Window.Styles>
+  <Grid>
+    <!-- Start of Windows Layout -->
+    <Border      
+      PointerPressed="Border_PointerPressed"
+      IsVisible="{Binding Windows}"
+      IsEnabled="{Binding Windows}"
+      CornerRadius="10"
+      Background="{DynamicResource BackgroundBrush}"
+      >
+      <StackPanel x:Name="MainPanel">
+        <StackPanel x:Name="TitleBar"
+          Orientation="Horizontal"
+          VerticalAlignment="Top"
+          HorizontalAlignment="Right">
+          <Button x:Name="MinimizeButton"
+            Click="MinimizeButton_Click"
+            CornerRadius="0,0,0,12"
+            BorderThickness="0"
+            Margin="0"
+            Width="40"
+            Height="30">
+            <Line HorizontalAlignment="Center" VerticalAlignment="Bottom" StartPoint="0,12" EndPoint="12,12" Stroke="White"/>
+          </Button>
+          <Button x:Name="MaximizeButton"
+            Click="MaximizeButton_Click"
+            CornerRadius="0,0,0,0"
+            BorderThickness="0"
+            Margin="0"
+            Width="40"
+            Height="30"/>
+          <Button x:Name="CloseButton"
+            Click="CloseButton_Click"
+            CornerRadius="0,12,0,0"
+            BorderThickness="0"
+            Margin="0"
+            Width="40"
+            Height="30">
+            <Canvas 
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+              <Line StartPoint="-6,-6" EndPoint="6,6" Stroke="White"/>
+              <Line StartPoint="-6,6" EndPoint="6,-6" Stroke="White"/>
+            </Canvas>
+          </Button>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <!-- End of Windows Layout -->
+
+    <!-- Start of Mobile Layout -->
+    <Border
+      IsVisible="{Binding Android}"
+      IsEnabled="{Binding Android}"
+      Background="{DynamicResource BackgroundBrush}">
+      <TextBlock
+        Classes="FatedFont"
+        FontSize="40"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        TextWrapping="Wrap">
+        Welcome to the Fated Companion Mobile App!
+      </TextBlock>
+    </Border>
+    <!-- End of Mobile Layout -->
+  </Grid>
+</Window>
