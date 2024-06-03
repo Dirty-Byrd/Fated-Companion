@@ -16,7 +16,8 @@
   ExtendClientAreaToDecorationsHint="True"
   ExtendClientAreaChromeHints="NoChrome"
   ExtendClientAreaTitleBarHeightHint="0"
-  SystemDecorations="None">
+  SystemDecorations="None"
+  SizeChanged="Window_SizeChanged">
   <Window.Resources>
     <ResourceDictionary>
       <ResourceDictionary.ThemeDictionaries>
@@ -52,7 +53,7 @@
   </Window.Styles>
   <Grid>
     <!-- Start of Windows Layout -->
-    <Border      
+    <Border x:Name="mainBorder"  
       PointerPressed="Border_PointerPressed"
       IsVisible="{Binding Windows}"
       IsEnabled="{Binding Windows}"
@@ -66,7 +67,7 @@
           HorizontalAlignment="Right">
           <Button x:Name="MinimizeButton"
             Click="MinimizeButton_Click"
-            CornerRadius="0,0,0,12"
+            CornerRadius="0,0,0,8"
             BorderThickness="0"
             Margin="0"
             Width="40"
@@ -79,10 +80,33 @@
             BorderThickness="0"
             Margin="0"
             Width="40"
-            Height="30"/>
+            Height="30">
+            <Grid>
+              <Canvas x:Name="normWindowMaxButton"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Line StartPoint="-6,-6" EndPoint="-6,6" Stroke="White"/>
+                <Line StartPoint="-6,6" EndPoint="6,6" Stroke="White"/>
+                <Line StartPoint="6,6" EndPoint="6,-6" Stroke="White"/>
+                <Line StartPoint="6,-6" EndPoint="-6,-6" Stroke="White"/>
+              </Canvas>
+              <Canvas x:Name="maxWindowMaxButton"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Line StartPoint="-3,-3" EndPoint="-3,-6" Stroke="White"/>
+                <Line StartPoint="-3,-6" EndPoint="6,-6" Stroke="White"/>
+                <Line StartPoint="6,-6" EndPoint="6,3" Stroke="White"/>
+                <Line StartPoint="6,3" EndPoint="3,3" Stroke="White"/>
+                <Line StartPoint="-6,-3" EndPoint="-6,6" Stroke="White"/>
+                <Line StartPoint="-6,6" EndPoint="3,6" Stroke="White"/>
+                <Line StartPoint="3,6" EndPoint="3,-3" Stroke="White"/>
+                <Line StartPoint="3,-3" EndPoint="-6,-3" Stroke="White"/>
+              </Canvas>
+            </Grid>
+          </Button>
           <Button x:Name="CloseButton"
             Click="CloseButton_Click"
-            CornerRadius="0,12,0,0"
+            CornerRadius="0,8,0,0"
             BorderThickness="0"
             Margin="0"
             Width="40"
@@ -95,24 +119,11 @@
             </Canvas>
           </Button>
         </StackPanel>
+        <Label Classes="FatedFont" x:Name="testLabel">Test</Label>
       </StackPanel>
     </Border>
     <!-- End of Windows Layout -->
-
-    <!-- Start of Mobile Layout -->
-    <Border
-      IsVisible="{Binding Android}"
-      IsEnabled="{Binding Android}"
-      Background="{DynamicResource BackgroundBrush}">
-      <TextBlock
-        Classes="FatedFont"
-        FontSize="40"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        TextWrapping="Wrap">
-        Welcome to the Fated Companion Mobile App!
-      </TextBlock>
-    </Border>
-    <!-- End of Mobile Layout -->
+    <views:MainView
+      IsVisible="{Binding Android}"/>
   </Grid>
 </Window>
