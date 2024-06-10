@@ -1,9 +1,14 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Input.Raw;
 using Avalonia.Styling;
 using System.Threading;
+using System.Threading.Tasks;
+using Avalonia.Diagnostics;
+using Avalonia.Interactivity;
+using Avalonia.Threading;
 
 namespace Fated_Companion.Views;
 
@@ -15,7 +20,8 @@ public partial class MainWindow : Window
         normWindowMaxButton.IsVisible = true;
         maxWindowMaxButton.IsVisible = false;
     }
-
+    
+    
     private void MinimizeButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         this.WindowState = WindowState.Minimized;
@@ -54,7 +60,7 @@ public partial class MainWindow : Window
         int screenWidth = Screens.Primary.WorkingArea.Width;
         int screenHeight = Screens.Primary.WorkingArea.Height;
 
-        if (this.Width>screenWidth && this.Height>screenHeight)
+        if (this.Width > screenWidth && this.Height > screenHeight)
         {
             this.WindowState = WindowState.Maximized;
             normWindowMaxButton.IsVisible = false;
@@ -67,4 +73,23 @@ public partial class MainWindow : Window
             maxWindowMaxButton.IsVisible = false;
         }
     }
+
+    private async void Control_OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        while (true)
+        {
+            await Task.Run(async () => await StartBackgroundProcess());
+        }
+    }
+
+    private async Task StartBackgroundProcess()
+    {
+        await Dispatcher.UIThread.InvokeAsync(() => BackgroundProcesses());
+    }
+
+    private void BackgroundProcesses()
+    {
+        
+    }
 }
+
