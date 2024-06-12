@@ -168,7 +168,8 @@
           <Button 
             x:Name="HomeButton"
             HorizontalAlignment="Left"
-            Classes="TabHeaders">
+            Classes="TabHeaders"
+            Click="HomeButton_OnClick">
             Home
           </Button>
           <StackPanel
@@ -176,22 +177,26 @@
             HorizontalAlignment="Center">
             <Button 
               x:Name="RulesetButton"
-              Classes="TabHeaders">
+              Classes="TabHeaders"
+              Click="RulesetButton_OnClick">
               Ruleset
             </Button>
             <Button 
               x:Name="TapestriesButton"
-              Classes="TabHeaders">
+              Classes="TabHeaders"
+              Click="TapestriesButton_OnClick">
               Tapestries
             </Button>
             <Button 
               x:Name="ToolsButton"
-              Classes="TabHeaders">
+              Classes="TabHeaders"
+              Click="ToolsButton_OnClick">
               Tools
             </Button>
             <Button 
               x:Name="SettingsButton"
-              Classes="TabHeaders">
+              Classes="TabHeaders"
+              Click="SettingsButton_OnClick">
               Settings
             </Button>
           </StackPanel>
@@ -206,11 +211,20 @@
           <TabControl 
             x:Name="MainContent"
             Classes="HiddenTabs">
-            <TabItem Header="Home"></TabItem>
-            <TabItem Header="Ruleset"></TabItem>
-            <TabItem Header="Tapestries"></TabItem>
-            <TabItem Header="Tools"></TabItem>
-            <TabItem Header="Settings"></TabItem>
+            <TabItem Header="Home">Home</TabItem>
+            <TabItem Header="Ruleset">Ruleset</TabItem>
+            <TabItem Header="Tapestries">Tapestries</TabItem>
+            <TabItem Header="Tools">Tools</TabItem>
+            <TabItem Header="Settings">
+              <ToggleSwitch
+                x:Name="DarkMode"
+                OffContent="Light"
+                OnContent="Dark"
+                IsCheckedChanged="DarkMode_OnIsCheckedChanged"
+                >
+                Theme
+              </ToggleSwitch>
+            </TabItem>
           </TabControl>
         </Border>
       </Grid>

@@ -23,6 +23,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         NormWindowMaxButton.IsVisible = true;
         MaxWindowMaxButton.IsVisible = false;
+        
     }
     
     
@@ -101,10 +102,41 @@ public partial class MainWindow : Window
     {
         
     }
+    
+    private void HomeButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainContent.SelectedIndex = 0;
+    }
 
-    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    private void RulesetButton_OnClick(object? sender, RoutedEventArgs e)
     {
         MainContent.SelectedIndex = 1;
+    }
+
+    private void TapestriesButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainContent.SelectedIndex = 2;
+    }
+
+    private void ToolsButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainContent.SelectedIndex = 3;
+    }
+    private void SettingsButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainContent.SelectedIndex = 4;
+    }
+
+    private void DarkMode_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        if (DarkMode.IsChecked ?? true)
+        {
+            RequestedThemeVariant = ThemeVariant.Dark;
+        }
+        else
+        {
+            RequestedThemeVariant = ThemeVariant.Light;
+        }
     }
 }
 
