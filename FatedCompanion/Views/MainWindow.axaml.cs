@@ -6,9 +6,13 @@ using Avalonia.Input.Raw;
 using Avalonia.Styling;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Data;
 using Avalonia.Diagnostics;
 using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
+using Avalonia.Media;
 using Avalonia.Threading;
+using Fated_Companion.ViewModels;
 
 namespace Fated_Companion.Views;
 
@@ -17,8 +21,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        normWindowMaxButton.IsVisible = true;
-        maxWindowMaxButton.IsVisible = false;
+        NormWindowMaxButton.IsVisible = true;
+        MaxWindowMaxButton.IsVisible = false;
     }
     
     
@@ -32,16 +36,18 @@ public partial class MainWindow : Window
         if (this.WindowState == WindowState.Normal)
         {
             this.WindowState = WindowState.Maximized;
-            //windowBTNS.Margin = new Thickness(0, 6, 6, 0);
-            normWindowMaxButton.IsVisible = false;
-            maxWindowMaxButton.IsVisible = true;
+            NormWindowMaxButton.IsVisible = false;
+            MaxWindowMaxButton.IsVisible = true;
+            CloseButton.CornerRadius = new CornerRadius(0);
+            MainBorder.CornerRadius = new CornerRadius(0);
         }
         else if (this.WindowState == WindowState.Maximized)
         {
             this.WindowState = WindowState.Normal;
-            //windowBTNS.Margin = new Thickness(0, 0, 0, 0);
-            normWindowMaxButton.IsVisible = true;
-            maxWindowMaxButton.IsVisible = false;
+            NormWindowMaxButton.IsVisible = true;
+            MaxWindowMaxButton.IsVisible = false;
+            CloseButton.CornerRadius = new CornerRadius(0,8,0,0);
+            MainBorder.CornerRadius = new CornerRadius(0,8,0,0);
         }
     }
 
@@ -63,14 +69,18 @@ public partial class MainWindow : Window
         if (this.Width > screenWidth && this.Height > screenHeight)
         {
             this.WindowState = WindowState.Maximized;
-            normWindowMaxButton.IsVisible = false;
-            maxWindowMaxButton.IsVisible = true;
+            NormWindowMaxButton.IsVisible = false;
+            MaxWindowMaxButton.IsVisible = true;
+            CloseButton.CornerRadius = new CornerRadius(0);
+            MainBorder.CornerRadius = new CornerRadius(0);
         }
 
         if (this.Width < screenWidth && this.Height < screenHeight)
         {
-            normWindowMaxButton.IsVisible = true;
-            maxWindowMaxButton.IsVisible = false;
+            NormWindowMaxButton.IsVisible = true;
+            MaxWindowMaxButton.IsVisible = false;
+            CloseButton.CornerRadius = new CornerRadius(0,8,0,0);
+            MainBorder.CornerRadius = new CornerRadius(0,8,0,0);
         }
     }
 
@@ -90,6 +100,11 @@ public partial class MainWindow : Window
     private void BackgroundProcesses()
     {
         
+    }
+
+    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainContent.SelectedIndex = 1;
     }
 }
 

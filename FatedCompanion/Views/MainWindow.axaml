@@ -24,16 +24,18 @@
     <ResourceDictionary>
       <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
-          <SolidColorBrush x:Key="BackgroundBrush">#FF1E1E1E</SolidColorBrush>
-          <SolidColorBrush x:Key="MidGroundBrush">DimGray</SolidColorBrush>
-          <SolidColorBrush x:Key="ForeGroundBrush">White</SolidColorBrush>
-          <SolidColorBrush x:Key="AccentBrush">IndianRed</SolidColorBrush>
+          <SolidColorBrush x:Key="BackgroundBrushDefault">#FF1E1E1E</SolidColorBrush>
+          <SolidColorBrush x:Key="MidGroundBrushDefault">#303030</SolidColorBrush>
+          <SolidColorBrush x:Key="ForeGroundBrushDefault">White</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentBrushDefault">IndianRed</SolidColorBrush>
+          <SolidColorBrush x:Key="OutlineBrushDefault">#3f3f3f</SolidColorBrush>
         </ResourceDictionary>
         <ResourceDictionary x:Key="Light">
-          <SolidColorBrush x:Key="BackgroundBrush">White</SolidColorBrush>
-          <SolidColorBrush x:Key="MidGroundBrush">DimGray</SolidColorBrush>
-          <SolidColorBrush x:Key="ForeGroundBrush">#FF1E1E1E</SolidColorBrush>
-          <SolidColorBrush x:Key="AccentBrush">IndianRed</SolidColorBrush>
+          <SolidColorBrush x:Key="BackgroundBrushDefault">White</SolidColorBrush>
+          <SolidColorBrush x:Key="MidGroundBrushDefault">#E8E8E8</SolidColorBrush>
+          <SolidColorBrush x:Key="ForeGroundBrushDefault">#FF1E1E1E</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentBrushDefault">IndianRed</SolidColorBrush>
+          <SolidColorBrush x:Key="OutlineBrushDefault">LightGray</SolidColorBrush>
         </ResourceDictionary>
       </ResourceDictionary.ThemeDictionaries>
     </ResourceDictionary>
@@ -52,86 +54,169 @@
     <Style Selector="TabControl.HiddenTabs WrapPanel">
       <Setter Property="IsVisible" Value="False"/>
     </Style>
+    <Style Selector="Button.TabHeaders">
+      <Setter Property="FontFamily" Value="{StaticResource AmiRFont}"/>
+      <Setter Property="FontSize" Value="30"/>
+      <Setter Property="FontWeight" Value="ExtraBold"/>
+      <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    <Style Selector="Button.TabHeaders:pointerover /template/ ContentPresenter">
+    </Style>
     <Style Selector="Button.CloseButton:pointerover /template/ ContentPresenter">
       <Setter Property="Background" Value="IndianRed"></Setter>
     </Style>
   </Window.Styles>
-  <Grid>
+  <Grid
+    x:Name="WindowGrid">
     <!-- Start of Windows Layout -->
-    <Border x:Name="mainBorder"  
+    <Border 
+      x:Name="MainBorder"  
       PointerPressed="Border_PointerPressed"
-      IsVisible="{Binding Windows}"
-      IsEnabled="{Binding Windows}"
-      Background="{DynamicResource BackgroundBrush}"
-      CornerRadius="8"
-      >
-      <StackPanel x:Name="MainPanel">
-        <StackPanel x:Name="TitleBar"
-          Orientation="Horizontal"
-          VerticalAlignment="Top"
-          HorizontalAlignment="Right">
-          <Button x:Name="MinimizeButton"
+      IsVisible="True"
+      IsEnabled="True"
+      Background="{DynamicResource BackgroundBrushDefault}"
+      CornerRadius="8">
+      <Grid 
+        x:Name="MainPanel"
+        ShowGridLines="False">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid 
+          x:Name="TitleBar"
+          Grid.Row="0"
+          ShowGridLines="False">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+          </Grid.ColumnDefinitions>
+          <Button 
+            x:Name="MinimizeButton"
             Click="MinimizeButton_Click"
             CornerRadius="0,0,0,8"
             BorderThickness="0"
             Margin="0"
             Width="40"
-            Height="30">
-            <Line HorizontalAlignment="Center" VerticalAlignment="Bottom" StartPoint="0,12" EndPoint="12,12" Stroke="White"/>
+            Height="30"
+            Background="Transparent"
+            Grid.Column="1">
+            <Line HorizontalAlignment="Center" VerticalAlignment="Bottom" StartPoint="0,12" EndPoint="12,12" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
           </Button>
-          <Button x:Name="MaximizeButton"
+          <Button 
+            x:Name="MaximizeButton"
             Click="MaximizeButton_Click"
             CornerRadius="0,0,0,0"
             BorderThickness="0"
             Margin="0"
             Width="40"
-            Height="30">
+            Height="30"
+            Background="Transparent"
+            Grid.Column="2">
             <Grid>
-              <Canvas x:Name="normWindowMaxButton"
+              <Canvas 
+                x:Name="NormWindowMaxButton"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-                <Line StartPoint="-6,-6" EndPoint="-6,6" Stroke="White"/>
-                <Line StartPoint="-6,6" EndPoint="6,6" Stroke="White"/>
-                <Line StartPoint="6,6" EndPoint="6,-6" Stroke="White"/>
-                <Line StartPoint="6,-6" EndPoint="-6,-6" Stroke="White"/>
+                <Line StartPoint="-6,-6" EndPoint="-6,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="-6,6" EndPoint="6,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="6,6" EndPoint="6,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="6,-6" EndPoint="-6,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
               </Canvas>
-              <Canvas x:Name="maxWindowMaxButton"
+              <Canvas 
+                x:Name="MaxWindowMaxButton"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-                <Line StartPoint="-3,-3" EndPoint="-3,-6" Stroke="White"/>
-                <Line StartPoint="-3,-6" EndPoint="6,-6" Stroke="White"/>
-                <Line StartPoint="6,-6" EndPoint="6,3" Stroke="White"/>
-                <Line StartPoint="6,3" EndPoint="3,3" Stroke="White"/>
-                <Line StartPoint="-6,-3" EndPoint="-6,6" Stroke="White"/>
-                <Line StartPoint="-6,6" EndPoint="3,6" Stroke="White"/>
-                <Line StartPoint="3,6" EndPoint="3,-3" Stroke="White"/>
-                <Line StartPoint="3,-3" EndPoint="-6,-3" Stroke="White"/>
+                <Line StartPoint="-3,-3" EndPoint="-3,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="-3,-6" EndPoint="6,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="6,-6" EndPoint="6,3" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="6,3" EndPoint="3,3" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="-6,-3" EndPoint="-6,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="-6,6" EndPoint="3,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="3,6" EndPoint="3,-3" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="3,-3" EndPoint="-6,-3" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
               </Canvas>
             </Grid>
           </Button>
-          <Button x:Name="CloseButton"
+          <Button 
+            x:Name="CloseButton"
             Classes="CloseButton"
             Click="CloseButton_Click"
             CornerRadius="0,8,0,0"
             BorderThickness="0"
             Margin="0"
             Width="40"
-            Height="30">
+            Height="30"
+            Background="Transparent"
+            Grid.Column="3">
             <Canvas 
               HorizontalAlignment="Center"
               VerticalAlignment="Center">
-              <Line StartPoint="-6,-6" EndPoint="6,6" Stroke="White"/>
-              <Line StartPoint="-6,6" EndPoint="6,-6" Stroke="White"/>
+              <Line StartPoint="-6,-6" EndPoint="6,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+              <Line StartPoint="-6,6" EndPoint="6,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
             </Canvas>
           </Button>
-        </StackPanel>
-        <Border Background="{DynamicResource MidGroundBrush}">
-          <Label Classes="FatedFont" x:Name="testLabel" Foreground="{DynamicResource ForeGroundBrush}">Test</Label>
+        </Grid>
+        <Grid
+          x:Name="TabHeaderStrip"
+          Grid.Row="1"
+          Margin="4">
+          <Button 
+            x:Name="HomeButton"
+            HorizontalAlignment="Left"
+            Classes="TabHeaders">
+            Home
+          </Button>
+          <StackPanel
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+            <Button 
+              x:Name="RulesetButton"
+              Classes="TabHeaders">
+              Ruleset
+            </Button>
+            <Button 
+              x:Name="TapestriesButton"
+              Classes="TabHeaders">
+              Tapestries
+            </Button>
+            <Button 
+              x:Name="ToolsButton"
+              Classes="TabHeaders">
+              Tools
+            </Button>
+            <Button 
+              x:Name="SettingsButton"
+              Classes="TabHeaders">
+              Settings
+            </Button>
+          </StackPanel>
+        </Grid>
+        <Border
+          Background="{DynamicResource MidGroundBrushDefault}"
+          Grid.Row="3"
+          Margin="4"
+          CornerRadius="4"
+          BorderBrush="{DynamicResource OutlineBrushDefault}"
+          BorderThickness="1">
+          <TabControl 
+            x:Name="MainContent"
+            Classes="HiddenTabs">
+            <TabItem Header="Home"></TabItem>
+            <TabItem Header="Ruleset"></TabItem>
+            <TabItem Header="Tapestries"></TabItem>
+            <TabItem Header="Tools"></TabItem>
+            <TabItem Header="Settings"></TabItem>
+          </TabControl>
         </Border>
-      </StackPanel>
+      </Grid>
     </Border>
     <!-- End of Windows Layout -->
     <views:MainView
-      IsVisible="{Binding Android}"/>
+      IsVisible="False"/>
   </Grid>
 </Window>
