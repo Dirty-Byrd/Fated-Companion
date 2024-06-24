@@ -18,8 +18,7 @@
   ExtendClientAreaTitleBarHeightHint="0"
   SystemDecorations="None"
   SizeChanged="Window_SizeChanged"
-  Loaded="Control_OnLoaded"
-  >
+  Loaded="Control_OnLoaded">
   <Window.Resources>
     <ResourceDictionary>
       <ResourceDictionary.ThemeDictionaries>
@@ -34,10 +33,10 @@
           <SolidColorBrush x:Key="BackgroundBrushDefault">White</SolidColorBrush>
           <SolidColorBrush x:Key="MidGroundBrushDefault">#E8E8E8</SolidColorBrush>
           <SolidColorBrush x:Key="ForeGroundBrushDefault">#FF1E1E1E</SolidColorBrush>
-          <SolidColorBrush x:Key="AccentBrushDefault">IndianRed</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentBrushDefault">LightBlue</SolidColorBrush>
           <SolidColorBrush x:Key="OutlineBrushDefault">LightGray</SolidColorBrush>
         </ResourceDictionary>
-      </ResourceDictionary.ThemeDictionaries>
+      </ResourceDictionary.ThemeDictionaries>    
     </ResourceDictionary>
   </Window.Resources>
   <Window.Styles>
@@ -64,6 +63,20 @@
     </Style>
     <Style Selector="Button.CloseButton:pointerover /template/ ContentPresenter">
       <Setter Property="Background" Value="IndianRed"></Setter>
+    </Style>
+    <Style Selector="ToggleSwitch:checked /template/ Border#SwitchKnobBounds">
+      <Setter Property="Background" Value="{DynamicResource AccentBrushDefault}"></Setter>
+    </Style>
+    <Style Selector="TreeViewItem /template/ Border#PART_LayoutRoot:pointerover">
+      <Setter Property="Background" Value="{DynamicResource MidGroundBrushDefault}"/>
+    </Style>
+    <Style Selector="TreeViewItem:selected /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource AccentBrushDefault}"/>
+    </Style>
+    <Style Selector="TreeViewItem">
+      <Setter Property="FontFamily" Value="{StaticResource AmiRFont}"/>
+      <Setter Property="FontSize" Value="22"/>
+      <Setter Property="CornerRadius" Value="3"/>
     </Style>
   </Window.Styles>
   <Grid
@@ -211,19 +224,81 @@
           <TabControl 
             x:Name="MainContent"
             Classes="HiddenTabs">
-            <TabItem Header="Home">Home</TabItem>
-            <TabItem Header="Ruleset">Ruleset</TabItem>
+            <TabItem Header="Home">
+              <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="30"
+                TextWrapping="WrapWithOverflow"
+                TextAlignment="Center"
+                FontFamily="{StaticResource AmiRFont}">
+                Welcome to the Fated Companion App!
+                <LineBreak/>
+                Where your fate is more than just a roll of the dice!
+              </TextBlock>
+            </TabItem>
+            <TabItem Header="Ruleset">
+              <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="225"></ColumnDefinition>
+                        <ColumnDefinition Width="5"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Border
+                        Grid.Column = "0"
+                        Background="{DynamicResource BackgroundBrushDefault}"
+                        BorderBrush="{DynamicResource OutlineBrushDefault}"
+                        BorderThickness="2"
+                        CornerRadius="4"
+                        Margin="0,12">
+                      <TreeView
+                        x:Name="RulesetTree"
+                        SizeChanged="RulesetTree_SizeChanged"
+                        SelectionChanged="RulesetTree_SelectionChanged">
+                      </TreeView>
+                    </Border>
+                    <GridSplitter 
+                      Width="10" 
+                      HorizontalAlignment="Stretch" 
+                      Grid.Column="1" 
+                      Background="Transparent">
+                    </GridSplitter>
+                    <Border
+                      Grid.Column="2"
+                      Background="{DynamicResource BackgroundBrushDefault}"
+                      BorderBrush="{DynamicResource OutlineBrushDefault}"
+                      BorderThickness="2"
+                      CornerRadius="4"
+                      Margin="0,12">
+                    </Border>
+              </Grid>  
+            </TabItem>
             <TabItem Header="Tapestries">Tapestries</TabItem>
             <TabItem Header="Tools">Tools</TabItem>
             <TabItem Header="Settings">
-              <ToggleSwitch
-                x:Name="DarkMode"
-                OffContent="Light"
-                OnContent="Dark"
-                IsCheckedChanged="DarkMode_OnIsCheckedChanged"
-                >
-                Theme
-              </ToggleSwitch>
+              <StackPanel
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+                <ToggleSwitch
+                  x:Name="DefaultTheme"
+                  OffContent="Off"
+                  OnContent="On"
+                  IsChecked="True"
+                  IsCheckedChanged="DefaultTheme_IsCheckedChanged"
+                  FontFamily="{StaticResource AmiRFont}"
+                  FontSize="22">
+                  Use Default Theme
+                </ToggleSwitch>
+                <ToggleSwitch
+                  x:Name="DarkMode"
+                  OffContent="Light"
+                  OnContent="Dark"
+                  IsCheckedChanged="DarkMode_OnIsCheckedChanged"
+                  FontFamily="{StaticResource AmiRFont}"
+                  FontSize="22">
+                  Theme
+                </ToggleSwitch>
+              </StackPanel>
             </TabItem>
           </TabControl>
         </Border>

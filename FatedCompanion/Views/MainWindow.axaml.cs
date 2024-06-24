@@ -21,9 +21,11 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+
         NormWindowMaxButton.IsVisible = true;
         MaxWindowMaxButton.IsVisible = false;
-        
+
+        //PopulateRulesetTree(@"documents\Ruleset",RulesetTree);
     }
     
     
@@ -87,10 +89,16 @@ public partial class MainWindow : Window
 
     private async void Control_OnLoaded(object? sender, RoutedEventArgs e)
     {
+        if (DefaultTheme.IsChecked ?? true) 
+        {
+            DarkMode.IsEnabled = false;
+        }
+
         while (true)
         {
             await Task.Run(async () => await StartBackgroundProcess());
         }
+
     }
 
     private async Task StartBackgroundProcess()
@@ -137,6 +145,84 @@ public partial class MainWindow : Window
         {
             RequestedThemeVariant = ThemeVariant.Light;
         }
+    }
+
+    private void DefaultTheme_IsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        if (DefaultTheme.IsChecked ?? true)
+        {
+            RequestedThemeVariant = ThemeVariant.Default;
+            DarkMode.IsEnabled = false;
+        }
+        else
+        {  
+            DarkMode.IsEnabled = true;
+
+            if (DarkMode.IsChecked ?? true)
+            {
+                RequestedThemeVariant = ThemeVariant.Dark;
+            }
+            else
+            {
+                RequestedThemeVariant = ThemeVariant.Light;
+            }
+        }
+    }
+
+    private void RulesetTree_SizeChanged(object? sender, SizeChangedEventArgs e)
+    {
+
+    }
+
+    private void RulesetTree_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+
+    }
+
+    private void PopulateRulesetTree(string DirectoryPath, object parent)
+    {
+        DirectoryPath = System.IO.Path.GetFullPath(DirectoryPath).Replace(@"bin\Debug\net7.0\", "");
+        string[] folders = System.IO.Directory.GetDirectories(DirectoryPath);
+        string[] files = System.IO.Directory.GetFiles(DirectoryPath);
+
+        foreach (string file in files) // Iterates over files in subfolder
+            {
+                string fileName = System.IO.Path.GetFileName(file).Replace(".xps", ""); // Changes partial path into useable full path
+
+                TreeViewItem childItem = new TreeViewItem(); // Creates new treeview item
+                childItem.Header = fileName; // Sets the new treeview item's header to the name of the file
+
+                if (parent.GetType() == typeof(TreeView))
+                    {
+                        TreeView parentItem = (TreeView)parent;
+                        parentItem.Items.Add(childItem); // Adds treeview items as a child of folder treeview item
+                    } 
+                    else if (parent.GetType() == typeof(TreeViewItem))
+                    {
+                        TreeViewItem parentItem = (TreeViewItem)parent;
+                        parentItem.Items.Add(childItem); // Adds treeview items as a child of folder treeview item
+                    }
+            }
+            foreach (string folder in folders) // Iterates over array of folders
+                {
+                    string folderName = System.IO.Path.GetFileName(folder); // Variable that stores the name of the file, excluding path
+
+                    TreeViewItem childDir = new TreeViewItem(); // Creates a new treeview item
+                    childDir.Header = folderName; // Sets the new treeview item's header to the name of the file
+
+                    if (parent.GetType() == typeof(TreeView))
+                        {
+                            TreeView parentItem = (TreeView)parent;
+                            parentItem.Items.Add(childDir); // Adds treeview items as a child of folder treeview item
+                        }
+                        else if (parent.GetType() == typeof(TreeViewItem))
+                        {
+                            TreeViewItem parentItem = (TreeViewItem)parent;
+                            parentItem.Items.Add(childDir); // Adds treeview items as a child of folder treeview item
+                        }
+
+                    PopulateRulesetTree(folder, childDir); // iterates the method to run on more subfolders
+                }
     }
 }
 
