@@ -101,13 +101,20 @@
         <Grid 
           x:Name="TitleBar"
           Grid.Row="0"
-          ShowGridLines="False">
+          ShowGridLines="False"
+          >
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
           </Grid.ColumnDefinitions>
+          <Label
+            Classes="FatedFont"
+            Grid.ColumnSpan="4"
+            Margin="5,0,0,0">
+            Fated: The Game Companion App
+          </Label>
           <Button 
             x:Name="MinimizeButton"
             Click="MinimizeButton_Click"
