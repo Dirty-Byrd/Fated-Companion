@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.iOS;
 using Avalonia.ReactiveUI;
+using Avalonia.WebView.iOS;
 
 using Foundation;
 
@@ -16,6 +17,7 @@ public partial class AppDelegate : AvaloniaAppDelegate<App>
     {
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
-            .UseReactiveUI();
+            .UseReactiveUI()
+            .UseIosWebView();
     }
 }

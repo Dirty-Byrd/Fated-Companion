@@ -277,6 +277,7 @@
                       BorderThickness="2"
                       CornerRadius="4"
                       Margin="0,12">
+                      <WebView Name="DocumentViewer"></WebView>
                     </Border>
               </Grid>  
             </TabItem>

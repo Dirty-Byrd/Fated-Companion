@@ -7,11 +7,18 @@ using Avalonia.Markup.Xaml;
 
 using Fated_Companion.ViewModels;
 using Fated_Companion.Views;
+using AvaloniaWebView;
 
 namespace Fated_Companion;
 
 public partial class App : Application
 {
+    public override void RegisterServices()
+    {
+        base.RegisterServices();
+        AvaloniaWebViewBuilder.Initialize(default);
+    }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);

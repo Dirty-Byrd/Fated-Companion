@@ -25,7 +25,8 @@ public partial class MainWindow : Window
         NormWindowMaxButton.IsVisible = true;
         MaxWindowMaxButton.IsVisible = false;
 
-        //PopulateRulesetTree(@"documents\Ruleset",RulesetTree);
+        //PopulateRulesetTree(@"Documents\Ruleset",RulesetTree);
+        LoadDocumentViewer();
     }
     
     
@@ -223,6 +224,16 @@ public partial class MainWindow : Window
 
                     PopulateRulesetTree(folder, childDir); // iterates the method to run on more subfolders
                 }
+    }
+
+    private void LoadDocumentViewer()
+    {
+        string path = System.IO.Path.GetFullPath(@"Documents\Ruleset.mht").Replace(@".Desktop\bin\Debug\net7.0", @"\Assets");
+        TreeViewItem testItem = new TreeViewItem();
+        testItem.Header = path;
+        RulesetTree.Items.Add(testItem);
+        Uri rulesetWelcomeURL = new Uri(path);
+        DocumentViewer.Url = rulesetWelcomeURL;
     }
 }
 
