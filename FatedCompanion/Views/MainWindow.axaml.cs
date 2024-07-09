@@ -228,7 +228,7 @@ public partial class MainWindow : Window
 
     private void LoadDocumentViewer()
     {
-        string path = System.IO.Path.GetFullPath(@"Documents\Ruleset.mht").Replace(@".Desktop\bin\Debug\net7.0", @"\Assets");
+        string path = System.IO.Path.GetFullPath(@"Assets\Documents\Ruleset.mht").Replace(@".Desktop\bin\Debug\net7.0\" , @"\").Replace(@".Desktop\bin\Release\net7.0\win-x86\" , @"\");
         TreeViewItem testItem = new TreeViewItem();
         testItem.Header = path;
         RulesetTree.Items.Add(testItem);
