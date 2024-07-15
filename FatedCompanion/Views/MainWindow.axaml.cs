@@ -13,6 +13,7 @@ using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.Threading;
 using Fated_Companion.ViewModels;
+using System.IO;
 
 namespace Fated_Companion.Views;
 
@@ -25,8 +26,7 @@ public partial class MainWindow : Window
         NormWindowMaxButton.IsVisible = true;
         MaxWindowMaxButton.IsVisible = false;
 
-        //PopulateRulesetTree(@"Documents\Ruleset",RulesetTree);
-        LoadDocumentViewer();
+        PopulateRulesetTree(@"Assets\Documents\Ruleset",RulesetTree);
     }
     
     
@@ -90,9 +90,9 @@ public partial class MainWindow : Window
 
     private async void Control_OnLoaded(object? sender, RoutedEventArgs e)
     {
-        if (DefaultTheme.IsChecked ?? true) 
+        if (DefaultThemeSwitch.IsChecked ?? true) 
         {
-            DarkMode.IsEnabled = false;
+            DarkModeSwitch.IsEnabled = false;
         }
 
         while (true)
@@ -114,58 +114,93 @@ public partial class MainWindow : Window
     
     private void HomeButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        MainContent.SelectedIndex = 0;
+        Home.IsVisible = true;
+        Ruleset.IsVisible = false;
+        Tapestries.IsVisible = false;
+        Tools.IsVisible = false;
+        Settings.IsVisible = false;
     }
 
     private void RulesetButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        MainContent.SelectedIndex = 1;
+        Home.IsVisible = false;
+        Ruleset.IsVisible = true;
+        Tapestries.IsVisible = false;
+        Tools.IsVisible = false;
+        Settings.IsVisible = false;
     }
 
     private void TapestriesButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        MainContent.SelectedIndex = 2;
+        Home.IsVisible = false;
+        Ruleset.IsVisible = false;
+        Tapestries.IsVisible = true;
+        Tools.IsVisible = false;
+        Settings.IsVisible = false;
     }
 
     private void ToolsButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        MainContent.SelectedIndex = 3;
+        Home.IsVisible = false;
+        Ruleset.IsVisible = false;
+        Tapestries.IsVisible = false;
+        Tools.IsVisible = true;
+        Settings.IsVisible = false;
     }
     private void SettingsButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        MainContent.SelectedIndex = 4;
+        Home.IsVisible = false;
+        Ruleset.IsVisible = false;
+        Tapestries.IsVisible = false;
+        Tools.IsVisible = false;
+        Settings.IsVisible = true;
     }
 
     private void DarkMode_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
     {
-        if (DarkMode.IsChecked ?? true)
+        if (DarkModeSwitch.IsChecked ?? true)
         {
             RequestedThemeVariant = ThemeVariant.Dark;
+            ChangeDocumentsThemes("Dark", @"Assets\Documents");
         }
         else
         {
             RequestedThemeVariant = ThemeVariant.Light;
+            ChangeDocumentsThemes("Light", @"Assets\Documents");
         }
     }
 
     private void DefaultTheme_IsCheckedChanged(object? sender, RoutedEventArgs e)
     {
-        if (DefaultTheme.IsChecked ?? true)
+        if (DefaultThemeSwitch.IsChecked ?? true)
         {
             RequestedThemeVariant = ThemeVariant.Default;
-            DarkMode.IsEnabled = false;
+            DarkModeSwitch.IsEnabled = false;
+            
+            ThemeVariant currentTheme = RequestedThemeVariant;
+
+            if (currentTheme == ThemeVariant.Light)
+            {
+                ChangeDocumentsThemes("Light", @"Assets\Documents");
+            }
+            else if (currentTheme == ThemeVariant.Dark)
+            {
+                ChangeDocumentsThemes("Dark", @"Assets\Documents");
+            }
         }
         else
         {  
-            DarkMode.IsEnabled = true;
+            DarkModeSwitch.IsEnabled = true;
 
-            if (DarkMode.IsChecked ?? true)
+            if (DarkModeSwitch.IsChecked ?? true)
             {
                 RequestedThemeVariant = ThemeVariant.Dark;
+                ChangeDocumentsThemes("Dark", @"Assets\Documents");
             }
             else
             {
                 RequestedThemeVariant = ThemeVariant.Light;
+                ChangeDocumentsThemes("Light", @"Assets\Documents");
             }
         }
     }
@@ -182,13 +217,13 @@ public partial class MainWindow : Window
 
     private void PopulateRulesetTree(string DirectoryPath, object parent)
     {
-        DirectoryPath = System.IO.Path.GetFullPath(DirectoryPath).Replace(@"bin\Debug\net7.0\", "");
+        DirectoryPath = System.IO.Path.GetFullPath(DirectoryPath).Replace(@".Desktop\bin\Debug\net7.0\", @"\").Replace(@".Desktop\bin\Release\net7.0\win-x86\", @"\");
         string[] folders = System.IO.Directory.GetDirectories(DirectoryPath);
         string[] files = System.IO.Directory.GetFiles(DirectoryPath);
 
         foreach (string file in files) // Iterates over files in subfolder
             {
-                string fileName = System.IO.Path.GetFileName(file).Replace(".xps", ""); // Changes partial path into useable full path
+                string fileName = System.IO.Path.GetFileName(file).Replace(".mht", ""); // Changes partial path into useable full path
 
                 TreeViewItem childItem = new TreeViewItem(); // Creates new treeview item
                 childItem.Header = fileName; // Sets the new treeview item's header to the name of the file
@@ -226,12 +261,53 @@ public partial class MainWindow : Window
                 }
     }
 
+    private void ChangeDocumentsThemes(string Theme, string Path)
+    {
+        string DocumentsPath = System.IO.Path.GetFullPath(Path).Replace(@".Desktop\bin\Debug\net7.0\", @"\").Replace(@".Desktop\bin\Release\net7.0\win-x86\", @"\");
+        string[] folders = System.IO.Directory.GetDirectories(DocumentsPath);
+        string[] files = System.IO.Directory.GetFiles(DocumentsPath);
+
+
+
+            foreach (string file in files) // Iterates over files in subfolder
+            {
+                if (Theme == "Dark")
+                {                    
+                    string fileContents = File.ReadAllText(file);
+                    string newText = fileContents.Replace("#1e1e1e", "white").Replace("WHITE", "#1E1E1E");
+                    File.WriteAllText(file, newText);
+                    LoadDocumentViewer();
+
+            } else
+                {
+                    string fileContents = File.ReadAllText(file);
+                    string newText = fileContents.Replace("#1E1E1E", "WHITE").Replace("white", "#1e1e1e");
+                    File.WriteAllText(file, newText);
+                    LoadDocumentViewer();
+                }
+            }
+            foreach (string folder in folders) // Iterates over array of folders
+            {
+                string folderName = System.IO.Path.GetFileName(folder); // Variable that stores the name of the file, excluding path
+
+
+                ChangeDocumentsThemes(Theme,folder); // iterates the method to run on more subfolders
+            }
+
+
+
+
+    }
+
+    private void WebView_Loaded(object sender, RoutedEventArgs e)
+    {
+        LoadDocumentViewer();
+    }
+
     private void LoadDocumentViewer()
     {
         string path = System.IO.Path.GetFullPath(@"Assets\Documents\Ruleset.mht").Replace(@".Desktop\bin\Debug\net7.0\" , @"\").Replace(@".Desktop\bin\Release\net7.0\win-x86\" , @"\");
-        TreeViewItem testItem = new TreeViewItem();
-        testItem.Header = path;
-        RulesetTree.Items.Add(testItem);
+        
         Uri rulesetWelcomeURL = new Uri(path);
         DocumentViewer.Url = rulesetWelcomeURL;
     }

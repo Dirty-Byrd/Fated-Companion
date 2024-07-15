@@ -228,11 +228,10 @@
           CornerRadius="4"
           BorderBrush="{DynamicResource OutlineBrushDefault}"
           BorderThickness="1">
-          <TabControl 
-            x:Name="MainContent"
-            Classes="HiddenTabs">
-            <TabItem Header="Home">
+          <Grid x:Name="MainContent">
               <TextBlock
+                x:Name="Home"
+                IsVisible="True"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="30"
@@ -243,9 +242,9 @@
                 <LineBreak/>
                 Where your fate is more than just a roll of the dice!
               </TextBlock>
-            </TabItem>
-            <TabItem Header="Ruleset">
-              <Grid>
+              <Grid 
+                x:Name="Ruleset"
+                IsVisible="False">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="225"></ColumnDefinition>
                         <ColumnDefinition Width="5"></ColumnDefinition>
@@ -257,7 +256,7 @@
                         BorderBrush="{DynamicResource OutlineBrushDefault}"
                         BorderThickness="2"
                         CornerRadius="4"
-                        Margin="0,12">
+                        Margin="11,12,0,12">
                       <TreeView
                         x:Name="RulesetTree"
                         SizeChanged="RulesetTree_SizeChanged"
@@ -276,19 +275,27 @@
                       BorderBrush="{DynamicResource OutlineBrushDefault}"
                       BorderThickness="2"
                       CornerRadius="4"
-                      Margin="0,12">
-                      <WebView Name="DocumentViewer"></WebView>
+                      Margin="0,12,11,12">
+                      <WebView Name="DocumentViewer" Loaded="WebView_Loaded"></WebView>
                     </Border>
-              </Grid>  
-            </TabItem>
-            <TabItem Header="Tapestries">Tapestries</TabItem>
-            <TabItem Header="Tools">Tools</TabItem>
-            <TabItem Header="Settings">
+              </Grid>
+            <Label
+              x:Name="Tapestries"
+              IsVisible="False">
+              Tapestries
+            </Label>
+            <Label
+              x:Name="Tools"
+              IsVisible="False">
+              Tools
+            </Label>
               <StackPanel
+                x:Name="Settings"
+                IsVisible="False"
               HorizontalAlignment="Center"
               VerticalAlignment="Center">
                 <ToggleSwitch
-                  x:Name="DefaultTheme"
+                  x:Name="DefaultThemeSwitch"
                   OffContent="Off"
                   OnContent="On"
                   IsChecked="True"
@@ -298,7 +305,7 @@
                   Use Default Theme
                 </ToggleSwitch>
                 <ToggleSwitch
-                  x:Name="DarkMode"
+                  x:Name="DarkModeSwitch"
                   OffContent="Light"
                   OnContent="Dark"
                   IsCheckedChanged="DarkMode_OnIsCheckedChanged"
@@ -307,8 +314,7 @@
                   Theme
                 </ToggleSwitch>
               </StackPanel>
-            </TabItem>
-          </TabControl>
+          </Grid>
         </Border>
       </Grid>
     </Border>
