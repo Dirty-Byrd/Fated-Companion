@@ -1,9 +1,9 @@
 MIME-Version: 1.0
-Content-Type: multipart/related; boundary="----=_NextPart_01DAD61A.C3ED1800"
+Content-Type: multipart/related; boundary="----=_NextPart_01DAD6DA.9C672170"
 
 This document is a Single File Web Page, also known as a Web Archive file.  If you are seeing this message, your browser or editor doesn't support Web Archive files.  Please download a browser that supports Web Archive.
 
-------=_NextPart_01DAD61A.C3ED1800
+------=_NextPart_01DAD6DA.9C672170
 Content-Location: file:///C:/70F45914/Ruleset.htm
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/html; charset="windows-1252"
@@ -25,11 +25,11 @@ xmlns=3D"http://www.w3.org/TR/REC-html40">
  <o:DocumentProperties>
   <o:Author>Alexander Byrd</o:Author>
   <o:LastAuthor>Alexander Byrd</o:LastAuthor>
-  <o:Revision>4</o:Revision>
-  <o:TotalTime>14</o:TotalTime>
+  <o:Revision>7</o:Revision>
+  <o:TotalTime>17</o:TotalTime>
   <o:LastPrinted>2024-01-19T20:53:00Z</o:LastPrinted>
   <o:Created>2024-07-08T13:54:00Z</o:Created>
-  <o:LastSaved>2024-07-14T22:22:00Z</o:LastSaved>
+  <o:LastSaved>2024-07-15T21:15:00Z</o:LastSaved>
   <o:Pages>1</o:Pages>
   <o:Words>11</o:Words>
   <o:Characters>67</o:Characters>
@@ -42,6 +42,8 @@ xmlns=3D"http://www.w3.org/TR/REC-html40">
   <o:AllowPNG/>
  </o:OfficeDocumentSettings>
 </xml><![endif]-->
+<link rel=3DdataStoreItem href=3D"Ruleset_files/item0006.xml"
+target=3D"Ruleset_files/props007.xml">
 <link rel=3DthemeData href=3D"Ruleset_files/themedata.thmx">
 <link rel=3DcolorSchemeMapping href=3D"Ruleset_files/colorschememapping.xml=
 ">
@@ -50,7 +52,6 @@ xmlns=3D"http://www.w3.org/TR/REC-html40">
   <w:View>Print</w:View>
   <w:DisplayBackgroundShape/>
   <w:SpellingState>Clean</w:SpellingState>
-  <w:GrammarState>Clean</w:GrammarState>
   <w:TrackMoves>false</w:TrackMoves>
   <w:TrackFormatting/>
   <w:PunctuationKerning/>
@@ -1893,26 +1894,46 @@ div.WordSection1
  </o:shapelayout></xml><![endif]-->
 </head>
 
-<body bgcolor=#1E1E1E lang=3DEN-US link=3D"#467886" vlink=3D"#96607D" style=3D'tab-interval=
-:.5in;
-word-wrap:break-word'>
+<body bgcolor=3D"#1E1E1E" lang=3DEN-US link=3D"#467886" vlink=3D"#96607D"
+style=3D'tab-interval:.5in;word-wrap:break-word'>
 
 <div class=3DWordSection1>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'><span
-style=3D'font-size:16.0pt;line-height:105%;font-family:Parchment'><o:p>&nbs=
-p;</o:p></span></p>
+style=3D'font-size:16.0pt;line-height:105%;font-family:Parchment;color:white;
+mso-style-textoutline-type:none;mso-style-textoutline-outlinestyle-dpiwidth:
+.75pt;mso-style-textoutline-outlinestyle-linecap:round;mso-style-textoutlin=
+e-outlinestyle-join:
+bevel;mso-style-textoutline-outlinestyle-pctmiterlimit:0%;mso-style-textout=
+line-outlinestyle-dash:
+solid;mso-style-textoutline-outlinestyle-align:center;mso-style-textoutline=
+-outlinestyle-compound:
+simple'><o:p>&nbsp;</o:p></span></p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'><span
-style=3D'font-size:150.0pt;line-height:105%;font-family:Parchment;color:white=
-'>Rules<o:p></o:p></span></p>
+style=3D'font-size:150.0pt;line-height:105%;font-family:Parchment;color:white;
+mso-style-textoutline-type:none;mso-style-textoutline-outlinestyle-dpiwidth:
+.75pt;mso-style-textoutline-outlinestyle-linecap:round;mso-style-textoutlin=
+e-outlinestyle-join:
+bevel;mso-style-textoutline-outlinestyle-pctmiterlimit:0%;mso-style-textout=
+line-outlinestyle-dash:
+solid;mso-style-textoutline-outlinestyle-align:center;mso-style-textoutline=
+-outlinestyle-compound:
+simple'>Rules<o:p></o:p></span></p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'><span
 style=3D'font-size:40.0pt;line-height:105%;font-family:"Ami R",serif;mso-ha=
 nsi-font-family:
-Parchment;color:white'>Please use the document tree on the left to browse all=
- our
-game rules.<o:p></o:p></span></p>
+Parchment;color:white;mso-style-textoutline-type:none;mso-style-textoutline-o=
+utlinestyle-dpiwidth:
+.75pt;mso-style-textoutline-outlinestyle-linecap:round;mso-style-textoutlin=
+e-outlinestyle-join:
+bevel;mso-style-textoutline-outlinestyle-pctmiterlimit:0%;mso-style-textout=
+line-outlinestyle-dash:
+solid;mso-style-textoutline-outlinestyle-align:center;mso-style-textoutline=
+-outlinestyle-compound:
+simple'>Please use the document tree on the left to browse all our game rul=
+es.<o:p></o:p></span></p>
 
 </div>
 
@@ -1920,7 +1941,27 @@ game rules.<o:p></o:p></span></p>
 
 </html>
 
-------=_NextPart_01DAD61A.C3ED1800
+------=_NextPart_01DAD6DA.9C672170
+Content-Location: file:///C:/70F45914/Ruleset_files/item0006.xml
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/xml
+
+<?xml version=3D"1.0" standalone=3D"no"?><b:Sources xmlns:b=3D"http://schem=
+as.openxmlformats.org/officeDocument/2006/bibliography" xmlns=3D"http://sch=
+emas.openxmlformats.org/officeDocument/2006/bibliography" SelectedStyle=3D"=
+\APASixthEditionOfficeOnline.xsl" StyleName=3D"APA" Version=3D"6"></b:Sourc=
+es>
+------=_NextPart_01DAD6DA.9C672170
+Content-Location: file:///C:/70F45914/Ruleset_files/props007.xml
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/xml
+
+<?xml version=3D"1.0" encoding=3D"UTF-8" standalone=3D"no"?>
+<ds:datastoreItem ds:itemID=3D"{25EA1CE5-F20B-4DB4-9687-94051049F9B9}" xmln=
+s:ds=3D"http://schemas.openxmlformats.org/officeDocument/2006/customXml"><d=
+s:schemaRefs><ds:schemaRef ds:uri=3D"http://schemas.openxmlformats.org/offi=
+ceDocument/2006/bibliography"/></ds:schemaRefs></ds:datastoreItem>
+------=_NextPart_01DAD6DA.9C672170
 Content-Location: file:///C:/70F45914/Ruleset_files/themedata.thmx
 Content-Transfer-Encoding: base64
 Content-Type: application/vnd.ms-officetheme
@@ -1985,7 +2026,7 @@ AAAAAAAAAAAA1gIAAHRoZW1lL3RoZW1lL3RoZW1lMS54bWxQSwECLQAUAAYACAAAACEADdGQn7YA
 AAAbAQAAJwAAAAAAAAAAAAAAAACYCgAAdGhlbWUvdGhlbWUvX3JlbHMvdGhlbWVNYW5hZ2VyLnht
 bC5yZWxzUEsFBgAAAAAFAAUAXQEAAJMLAAAAAA==
 
-------=_NextPart_01DAD61A.C3ED1800
+------=_NextPart_01DAD6DA.9C672170
 Content-Location: file:///C:/70F45914/Ruleset_files/colorschememapping.xml
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/xml
@@ -1995,15 +2036,17 @@ Content-Type: text/xml
  bg1=3D"lt1" tx1=3D"dk1" bg2=3D"lt2" tx2=3D"dk2" accent1=3D"accent1" accent=
 2=3D"accent2" accent3=3D"accent3" accent4=3D"accent4" accent5=3D"accent5" a=
 ccent6=3D"accent6" hlink=3D"hlink" folHlink=3D"folHlink"/>
-------=_NextPart_01DAD61A.C3ED1800
+------=_NextPart_01DAD6DA.9C672170
 Content-Location: file:///C:/70F45914/Ruleset_files/filelist.xml
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/xml; charset="utf-8"
 
 <xml xmlns:o=3D"urn:schemas-microsoft-com:office:office">
  <o:MainFile HRef=3D"../Ruleset.htm"/>
+ <o:File HRef=3D"item0006.xml"/>
+ <o:File HRef=3D"props007.xml"/>
  <o:File HRef=3D"themedata.thmx"/>
  <o:File HRef=3D"colorschememapping.xml"/>
  <o:File HRef=3D"filelist.xml"/>
 </xml>
-------=_NextPart_01DAD61A.C3ED1800--
+------=_NextPart_01DAD6DA.9C672170--

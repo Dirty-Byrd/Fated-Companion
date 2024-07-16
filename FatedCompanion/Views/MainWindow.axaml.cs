@@ -19,6 +19,8 @@ namespace Fated_Companion.Views;
 
 public partial class MainWindow : Window
 {
+    string selectedTreeViewItemPath = @"Assets\Documents\Ruleset.mht";
+
     public MainWindow()
     {
         InitializeComponent();
@@ -27,6 +29,8 @@ public partial class MainWindow : Window
         MaxWindowMaxButton.IsVisible = false;
 
         PopulateRulesetTree(@"Assets\Documents\Ruleset",RulesetTree);
+
+        StartupDocumentsThemes();
     }
     
     
@@ -168,6 +172,8 @@ public partial class MainWindow : Window
             RequestedThemeVariant = ThemeVariant.Light;
             ChangeDocumentsThemes("Light", @"Assets\Documents");
         }
+
+        DocumentViewer.Reload();
     }
 
     private void DefaultTheme_IsCheckedChanged(object? sender, RoutedEventArgs e)
@@ -177,7 +183,7 @@ public partial class MainWindow : Window
             RequestedThemeVariant = ThemeVariant.Default;
             DarkModeSwitch.IsEnabled = false;
             
-            ThemeVariant currentTheme = RequestedThemeVariant;
+            ThemeVariant currentTheme = ActualThemeVariant;
 
             if (currentTheme == ThemeVariant.Light)
             {
@@ -203,6 +209,8 @@ public partial class MainWindow : Window
                 ChangeDocumentsThemes("Light", @"Assets\Documents");
             }
         }
+
+        DocumentViewer.Reload();
     }
 
     private void RulesetTree_SizeChanged(object? sender, SizeChangedEventArgs e)
@@ -212,7 +220,37 @@ public partial class MainWindow : Window
 
     private void RulesetTree_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        TreeViewItem? item = RulesetTree.SelectedItem as TreeViewItem;
 
+        bool loop = true;
+
+        string path = item.Header.ToString() + ".mht";
+
+        while (loop)
+        {
+            TreeViewItem? parent = item.Parent as TreeViewItem;
+
+            try
+            {
+                path = parent.Header.ToString() + "\\" + path;
+            }
+            catch
+            {
+                loop = false; 
+                break;
+            }
+            item = parent as TreeViewItem;
+        }
+        selectedTreeViewItemPath = "Assets\\Documents\\Ruleset\\" + path;
+
+        try
+        {
+            LoadDocumentViewer(selectedTreeViewItemPath);
+        }
+        catch
+        {
+
+        }
     }
 
     private void PopulateRulesetTree(string DirectoryPath, object parent)
@@ -276,14 +314,14 @@ public partial class MainWindow : Window
                     string fileContents = File.ReadAllText(file);
                     string newText = fileContents.Replace("#1e1e1e", "white").Replace("WHITE", "#1E1E1E");
                     File.WriteAllText(file, newText);
-                    LoadDocumentViewer();
+                    LoadDocumentViewer(selectedTreeViewItemPath);
 
             } else
                 {
                     string fileContents = File.ReadAllText(file);
                     string newText = fileContents.Replace("#1E1E1E", "WHITE").Replace("white", "#1e1e1e");
                     File.WriteAllText(file, newText);
-                    LoadDocumentViewer();
+                    LoadDocumentViewer(selectedTreeViewItemPath);
                 }
             }
             foreach (string folder in folders) // Iterates over array of folders
@@ -293,23 +331,38 @@ public partial class MainWindow : Window
 
                 ChangeDocumentsThemes(Theme,folder); // iterates the method to run on more subfolders
             }
+    }
 
+    private void StartupDocumentsThemes()
+    {
+        ThemeVariant currentTheme = ActualThemeVariant;
 
-
-
+        if (currentTheme == ThemeVariant.Light)
+        {
+            ChangeDocumentsThemes("Light", @"Assets\Documents");
+        }
+        else if (currentTheme == ThemeVariant.Dark)
+        {
+            ChangeDocumentsThemes("Dark", @"Assets\Documents");
+        }
     }
 
     private void WebView_Loaded(object sender, RoutedEventArgs e)
     {
-        LoadDocumentViewer();
+        LoadDocumentViewer(@"Assets\Documents\Ruleset.mht");
     }
 
-    private void LoadDocumentViewer()
+    private void LoadDocumentViewer(string Path)
     {
-        string path = System.IO.Path.GetFullPath(@"Assets\Documents\Ruleset.mht").Replace(@".Desktop\bin\Debug\net7.0\" , @"\").Replace(@".Desktop\bin\Release\net7.0\win-x86\" , @"\");
+        string path = System.IO.Path.GetFullPath(Path).Replace(@".Desktop\bin\Debug\net7.0\", @"\").Replace(@".Desktop\bin\Release\net7.0\win-x86\", @"\");
         
-        Uri rulesetWelcomeURL = new Uri(path);
-        DocumentViewer.Url = rulesetWelcomeURL;
+        if (File.Exists(path))
+        {
+            
+
+            Uri documentURL = new Uri(path);
+            DocumentViewer.Url = documentURL;
+        }
     }
 }
 
