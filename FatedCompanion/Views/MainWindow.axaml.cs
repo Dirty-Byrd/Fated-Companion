@@ -17,12 +17,28 @@ using System.IO;
 
 namespace Fated_Companion.Views;
 
+public class Settings
+{
+    bool DefaultThemeSwitchOn;
+    bool DarkModeSwitchOn;
+}
+
 public partial class MainWindow : Window
 {
     string selectedTreeViewItemPath = @"Assets\Documents\Ruleset.mht";
+    string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments), "Fated");
+    string SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Fated", "Settings","fated.set");
+
+    Settings AppSettings = new Settings();
 
     public MainWindow()
     {
+        CreateDirectories();
+
+        LoadSettings();
+        GetSettings();
+        SaveSettings();
+
         InitializeComponent();
 
         NormWindowMaxButton.IsVisible = true;
@@ -32,7 +48,43 @@ public partial class MainWindow : Window
 
         StartupDocumentsThemes();
     }
-    
+
+    private void CreateDirectories()
+    {
+        Directory.CreateDirectory(AppDataPath);
+        Directory.CreateDirectory(SettingsPath);
+    }
+
+    private void LoadSettings()
+    {
+        try
+        {
+            using (FileStream fs = new FileStream(SettingsPath, FileMode.Open))
+            {
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(typeof(Settings));
+
+                AppSettings = x.Deserialize(fs) as Settings;
+            }
+        } 
+        catch
+        {
+
+        }
+    }
+
+    private void GetSettings()
+    {
+
+    }
+
+    private void SaveSettings()
+    {
+        using (StreamWriter writer = new StreamWriter(SettingsPath))
+        {
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(typeof(Settings));
+            x.Serialize(writer, AppSettings);
+        }
+    }
     
     private void MinimizeButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
