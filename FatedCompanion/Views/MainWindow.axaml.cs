@@ -19,15 +19,15 @@ namespace Fated_Companion.Views;
 
 public class Settings
 {
-    bool DefaultThemeSwitchOn;
-    bool DarkModeSwitchOn;
+    public bool DefaultThemeSwitchOn;
+    public bool DarkModeSwitchOn;
 }
 
 public partial class MainWindow : Window
 {
     string selectedTreeViewItemPath = @"Assets\Documents\Ruleset.mht";
-    string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments), "Fated");
-    string SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Fated", "Settings","fated.set");
+    string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Fated");
+    string SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Fated", "Settings","fated.set");
 
     Settings AppSettings = new Settings();
 
@@ -36,10 +36,11 @@ public partial class MainWindow : Window
         CreateDirectories();
 
         LoadSettings();
-        GetSettings();
-        SaveSettings();
 
         InitializeComponent();
+
+        GetSettings();
+        SaveSettings();
 
         NormWindowMaxButton.IsVisible = true;
         MaxWindowMaxButton.IsVisible = false;
@@ -74,7 +75,8 @@ public partial class MainWindow : Window
 
     private void GetSettings()
     {
-
+        AppSettings.DefaultThemeSwitchOn = (DefaultThemeSwitch.IsChecked == true);
+        AppSettings.DarkModeSwitchOn = (DarkModeSwitch.IsChecked == true);
     }
 
     private void SaveSettings()
