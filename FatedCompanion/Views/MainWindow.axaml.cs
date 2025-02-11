@@ -14,6 +14,7 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using Fated_Companion.ViewModels;
 using System.IO;
+using GLib;
 
 namespace Fated_Companion.Views;
 
@@ -83,8 +84,38 @@ public partial class MainWindow : Window
         //AppSettings.DefaultThemeSwitchOn = (DefaultThemeSwitch.IsChecked == true);
         //AppSettings.DarkModeSwitchOn = (DarkModeSwitch.IsChecked == true);
 
-        //DefaultThemeSwitch.IsChecked = AppSettings.DefaultThemeSwitchOn;
-        //DarkModeSwitch.IsChecked = AppSettings.DarkModeSwitchOn;
+        DefaultThemeSwitch.IsChecked = AppSettings.DefaultThemeSwitchOn;
+        DarkModeSwitch.IsChecked = AppSettings.DarkModeSwitchOn;
+
+        if (AppSettings.DefaultThemeSwitchOn)
+        {
+            RequestedThemeVariant = ThemeVariant.Default;
+            DarkModeSwitch.IsEnabled = false;
+
+            ThemeVariant currentTheme = ActualThemeVariant;
+
+            if (currentTheme == ThemeVariant.Light)
+            {
+                ChangeDocumentsThemes("Light", @"Assets\Documents");
+            }
+            else if (currentTheme == ThemeVariant.Dark)
+            {
+                ChangeDocumentsThemes("Dark", @"Assets\Documents");
+            }
+        }
+        else
+        {
+            if (AppSettings.DarkModeSwitchOn)
+            {
+                RequestedThemeVariant = ThemeVariant.Dark;
+                ChangeDocumentsThemes("Dark", @"Assets\Documents");
+            }
+            else 
+            {
+                RequestedThemeVariant = ThemeVariant.Light;
+                ChangeDocumentsThemes("Light", @"Assets\Documents");
+            }
+        }
     }
 
     private void SaveSettings()
@@ -163,12 +194,12 @@ public partial class MainWindow : Window
 
         while (true)
         {
-            await Task.Run(async () => await StartBackgroundProcess());
+            await System.Threading.Tasks.Task.Run(async () => await StartBackgroundProcess());
         }
 
     }
 
-    private async Task StartBackgroundProcess()
+    private async System.Threading.Tasks.Task StartBackgroundProcess()
     {
         await Dispatcher.UIThread.InvokeAsync(() => BackgroundProcesses());
     }
@@ -254,10 +285,12 @@ public partial class MainWindow : Window
             if (currentTheme == ThemeVariant.Light)
             {
                 ChangeDocumentsThemes("Light", @"Assets\Documents");
+                AppSettings.DarkModeSwitchOn = false;
             }
             else if (currentTheme == ThemeVariant.Dark)
             {
                 ChangeDocumentsThemes("Dark", @"Assets\Documents");
+                AppSettings.DarkModeSwitchOn = true;
             }
         }
         else
