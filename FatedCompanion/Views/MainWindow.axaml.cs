@@ -27,7 +27,8 @@ public partial class MainWindow : Window
 {
     string selectedTreeViewItemPath = @"Assets\Documents\Ruleset.mht";
     string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Fated");
-    string SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Fated", "Settings","fated.set");
+    string SettingsFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Fated");
+    string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Fated", ".set");
 
     Settings AppSettings = new Settings();
 
@@ -40,7 +41,6 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         GetSettings();
-        SaveSettings();
 
         NormWindowMaxButton.IsVisible = true;
         MaxWindowMaxButton.IsVisible = false;
@@ -53,14 +53,19 @@ public partial class MainWindow : Window
     private void CreateDirectories()
     {
         Directory.CreateDirectory(AppDataPath);
-        Directory.CreateDirectory(SettingsPath);
+        Directory.CreateDirectory(SettingsFolderPath);
+
+        if (File.Exists(SettingsFilePath) == false )
+        {
+            File.Create(SettingsFilePath);
+        }
     }
 
     private void LoadSettings()
     {
         try
         {
-            using (FileStream fs = new FileStream(SettingsPath, FileMode.Open))
+            using (FileStream fs = new FileStream(SettingsFilePath, FileMode.Open))
             {
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(typeof(Settings));
 
@@ -75,13 +80,16 @@ public partial class MainWindow : Window
 
     private void GetSettings()
     {
-        AppSettings.DefaultThemeSwitchOn = (DefaultThemeSwitch.IsChecked == true);
-        AppSettings.DarkModeSwitchOn = (DarkModeSwitch.IsChecked == true);
+        //AppSettings.DefaultThemeSwitchOn = (DefaultThemeSwitch.IsChecked == true);
+        //AppSettings.DarkModeSwitchOn = (DarkModeSwitch.IsChecked == true);
+
+        //DefaultThemeSwitch.IsChecked = AppSettings.DefaultThemeSwitchOn;
+        //DarkModeSwitch.IsChecked = AppSettings.DarkModeSwitchOn;
     }
 
     private void SaveSettings()
     {
-        using (StreamWriter writer = new StreamWriter(SettingsPath))
+        using (StreamWriter writer = new StreamWriter(SettingsFilePath))
         {
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(typeof(Settings));
             x.Serialize(writer, AppSettings);
@@ -220,14 +228,17 @@ public partial class MainWindow : Window
         {
             RequestedThemeVariant = ThemeVariant.Dark;
             ChangeDocumentsThemes("Dark", @"Assets\Documents");
+            AppSettings.DarkModeSwitchOn = true;
         }
         else
         {
             RequestedThemeVariant = ThemeVariant.Light;
             ChangeDocumentsThemes("Light", @"Assets\Documents");
+            AppSettings.DarkModeSwitchOn = false;
         }
 
         DocumentViewer.Reload();
+        SaveSettings();
     }
 
     private void DefaultTheme_IsCheckedChanged(object? sender, RoutedEventArgs e)
@@ -238,6 +249,7 @@ public partial class MainWindow : Window
             DarkModeSwitch.IsEnabled = false;
             
             ThemeVariant currentTheme = ActualThemeVariant;
+            AppSettings.DefaultThemeSwitchOn = true;
 
             if (currentTheme == ThemeVariant.Light)
             {
@@ -251,20 +263,24 @@ public partial class MainWindow : Window
         else
         {  
             DarkModeSwitch.IsEnabled = true;
+            AppSettings.DefaultThemeSwitchOn = false;
 
             if (DarkModeSwitch.IsChecked ?? true)
             {
                 RequestedThemeVariant = ThemeVariant.Dark;
                 ChangeDocumentsThemes("Dark", @"Assets\Documents");
+                AppSettings.DarkModeSwitchOn = true;
             }
             else
             {
                 RequestedThemeVariant = ThemeVariant.Light;
                 ChangeDocumentsThemes("Light", @"Assets\Documents");
+                AppSettings.DarkModeSwitchOn = false;
             }
         }
 
         DocumentViewer.Reload();
+        SaveSettings();
     }
 
     private void RulesetTree_SizeChanged(object? sender, SizeChangedEventArgs e)
