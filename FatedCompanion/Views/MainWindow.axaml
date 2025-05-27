@@ -125,7 +125,7 @@
             Height="30"
             Background="Transparent"
             Grid.Column="1">
-            <Line HorizontalAlignment="Center" VerticalAlignment="Bottom" StartPoint="0,12" EndPoint="12,12" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+            <Line HorizontalAlignment="Center" VerticalAlignment="Center" StartPoint="0,0" EndPoint="12,0" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
           </Button>
           <Button 
             x:Name="MaximizeButton"
