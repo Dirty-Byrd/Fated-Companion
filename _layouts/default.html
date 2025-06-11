@@ -7,5 +7,6 @@
   <body>
     {{ content }}
     {% include navigation.html %}
+    <p>{{ page.url | absolute_url }}</p>
   </body>
 </html>
