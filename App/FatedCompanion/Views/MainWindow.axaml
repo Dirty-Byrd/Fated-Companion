@@ -1,0 +1,324 @@
+<Window 
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:vm="using:Fated_Companion.ViewModels"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:views="clr-namespace:Fated_Companion.Views"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+  x:Class="Fated_Companion.Views.MainWindow"
+  Icon="/Assets/avalonia-logo.ico"
+  Title="Fated: The Game Companion App"
+  MinHeight="450"
+  MinWidth="800"
+  Background="Transparent"
+  WindowStartupLocation="CenterScreen"
+  ExtendClientAreaToDecorationsHint="True"
+  ExtendClientAreaChromeHints="NoChrome"
+  ExtendClientAreaTitleBarHeightHint="0"
+  SystemDecorations="None"
+  SizeChanged="Window_SizeChanged"
+  Loaded="Control_OnLoaded">
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="BackgroundBrushDefault">#FF1E1E1E</SolidColorBrush>
+          <SolidColorBrush x:Key="MidGroundBrushDefault">#303030</SolidColorBrush>
+          <SolidColorBrush x:Key="ForeGroundBrushDefault">White</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentBrushDefault">IndianRed</SolidColorBrush>
+          <SolidColorBrush x:Key="OutlineBrushDefault">#3f3f3f</SolidColorBrush>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="BackgroundBrushDefault">White</SolidColorBrush>
+          <SolidColorBrush x:Key="MidGroundBrushDefault">#E8E8E8</SolidColorBrush>
+          <SolidColorBrush x:Key="ForeGroundBrushDefault">#FF1E1E1E</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentBrushDefault">LightBlue</SolidColorBrush>
+          <SolidColorBrush x:Key="OutlineBrushDefault">LightGray</SolidColorBrush>
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>    
+    </ResourceDictionary>
+  </Window.Resources>
+  <Window.Styles>
+    <Style Selector="Label.FatedFont">
+      <Setter Property="FontFamily" Value="{StaticResource AmiRFont}"/>
+      <Setter Property="FontSize" Value="20"/>
+      <Setter Property="FontWeight" Value="ExtraBold"/>
+    </Style>
+    <Style Selector="TextBlock.FatedFont">
+      <Setter Property="FontFamily" Value="{StaticResource AmiRFont}"/>
+      <Setter Property="FontSize" Value="20"/>
+      <Setter Property="FontWeight" Value="ExtraBold"/>
+    </Style>
+    <Style Selector="TabControl.HiddenTabs WrapPanel">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="Button.TabHeaders">
+      <Setter Property="FontFamily" Value="{StaticResource AmiRFont}"/>
+      <Setter Property="FontSize" Value="30"/>
+      <Setter Property="FontWeight" Value="ExtraBold"/>
+      <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    <Style Selector="Button.TabHeaders:pointerover /template/ ContentPresenter">
+    </Style>
+    <Style Selector="Button.CloseButton:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="IndianRed"></Setter>
+    </Style>
+    <Style Selector="ToggleSwitch:checked /template/ Border#SwitchKnobBounds">
+      <Setter Property="Background" Value="{DynamicResource AccentBrushDefault}"></Setter>
+    </Style>
+    <Style Selector="TreeViewItem /template/ Border#PART_LayoutRoot:pointerover">
+      <Setter Property="Background" Value="{DynamicResource MidGroundBrushDefault}"/>
+    </Style>
+    <Style Selector="TreeViewItem:selected /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource AccentBrushDefault}"/>
+    </Style>
+    <Style Selector="TreeViewItem">
+      <Setter Property="FontFamily" Value="{StaticResource AmiRFont}"/>
+      <Setter Property="FontSize" Value="22"/>
+      <Setter Property="CornerRadius" Value="3"/>
+    </Style>
+  </Window.Styles>
+  <Grid
+    x:Name="WindowGrid">
+    <!-- Start of Windows Layout -->
+    <Border 
+      x:Name="MainBorder"  
+      PointerPressed="Border_PointerPressed"
+      IsVisible="True"
+      IsEnabled="True"
+      Background="{DynamicResource BackgroundBrushDefault}"
+      CornerRadius="8">
+      <Grid 
+        x:Name="MainPanel"
+        ShowGridLines="False">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid 
+          x:Name="TitleBar"
+          Grid.Row="0"
+          ShowGridLines="False"
+          >
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+          </Grid.ColumnDefinitions>
+          <Label
+            Classes="FatedFont"
+            Grid.ColumnSpan="4"
+            Margin="5,0,0,0">
+            Fated: The Game Companion App
+          </Label>
+          <Button 
+            x:Name="MinimizeButton"
+            Click="MinimizeButton_Click"
+            CornerRadius="0,0,0,8"
+            BorderThickness="0"
+            Margin="0"
+            Width="40"
+            Height="30"
+            Background="Transparent"
+            Grid.Column="1">
+            <Line HorizontalAlignment="Center" VerticalAlignment="Center" StartPoint="0,0" EndPoint="12,0" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+          </Button>
+          <Button 
+            x:Name="MaximizeButton"
+            Click="MaximizeButton_Click"
+            CornerRadius="0,0,0,0"
+            BorderThickness="0"
+            Margin="0"
+            Width="40"
+            Height="30"
+            Background="Transparent"
+            Grid.Column="2">
+            <Grid>
+              <Canvas 
+                x:Name="NormWindowMaxButton"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Line StartPoint="-6,-6" EndPoint="-6,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="-6,6" EndPoint="6,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="6,6" EndPoint="6,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="6,-6" EndPoint="-6,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+              </Canvas>
+              <Canvas 
+                x:Name="MaxWindowMaxButton"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Line StartPoint="-3,-3" EndPoint="-3,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="-3,-6" EndPoint="6,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="6,-6" EndPoint="6,3" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="6,3" EndPoint="3,3" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="-6,-3" EndPoint="-6,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="-6,6" EndPoint="3,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="3,6" EndPoint="3,-3" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+                <Line StartPoint="3,-3" EndPoint="-6,-3" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+              </Canvas>
+            </Grid>
+          </Button>
+          <Button 
+            x:Name="CloseButton"
+            Classes="CloseButton"
+            Click="CloseButton_Click"
+            CornerRadius="0,8,0,0"
+            BorderThickness="0"
+            Margin="0"
+            Width="40"
+            Height="30"
+            Background="Transparent"
+            Grid.Column="3">
+            <Canvas 
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+              <Line StartPoint="-6,-6" EndPoint="6,6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+              <Line StartPoint="-6,6" EndPoint="6,-6" Stroke="{DynamicResource ForeGroundBrushDefault}"/>
+            </Canvas>
+          </Button>
+        </Grid>
+        <Grid
+          x:Name="TabHeaderStrip"
+          Grid.Row="1"
+          Margin="4">
+          <Button 
+            x:Name="HomeButton"
+            HorizontalAlignment="Left"
+            Classes="TabHeaders"
+            Click="HomeButton_OnClick">
+            Home
+          </Button>
+          <StackPanel
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+            <Button 
+              x:Name="RulesetButton"
+              Classes="TabHeaders"
+              Click="RulesetButton_OnClick">
+              Ruleset
+            </Button>
+            <Button 
+              x:Name="TapestriesButton"
+              Classes="TabHeaders"
+              Click="TapestriesButton_OnClick">
+              Tapestries
+            </Button>
+            <Button 
+              x:Name="ToolsButton"
+              Classes="TabHeaders"
+              Click="ToolsButton_OnClick">
+              Tools
+            </Button>
+            <Button 
+              x:Name="SettingsButton"
+              Classes="TabHeaders"
+              Click="SettingsButton_OnClick">
+              Settings
+            </Button>
+          </StackPanel>
+        </Grid>
+        <Border
+          Background="{DynamicResource MidGroundBrushDefault}"
+          Grid.Row="3"
+          Margin="4"
+          CornerRadius="4"
+          BorderBrush="{DynamicResource OutlineBrushDefault}"
+          BorderThickness="1">
+          <Grid x:Name="MainContent">
+              <TextBlock
+                x:Name="Home"
+                IsVisible="True"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="30"
+                TextWrapping="WrapWithOverflow"
+                TextAlignment="Center"
+                FontFamily="{StaticResource AmiRFont}">
+                Welcome to the Fated Companion App!
+                <LineBreak/>
+                Where your fate is more than just a roll of the dice!
+              </TextBlock>
+              <Grid 
+                x:Name="Ruleset"
+                IsVisible="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="225"></ColumnDefinition>
+                        <ColumnDefinition Width="5"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Border
+                        Grid.Column = "0"
+                        Background="{DynamicResource BackgroundBrushDefault}"
+                        BorderBrush="{DynamicResource OutlineBrushDefault}"
+                        BorderThickness="2"
+                        CornerRadius="4"
+                        Margin="11,12,0,12">
+                      <TreeView
+                        x:Name="RulesetTree"
+                        SizeChanged="RulesetTree_SizeChanged"
+                        SelectionChanged="RulesetTree_SelectionChanged">
+                      </TreeView>
+                    </Border>
+                    <GridSplitter 
+                      Width="10" 
+                      HorizontalAlignment="Stretch" 
+                      Grid.Column="1" 
+                      Background="Transparent">
+                    </GridSplitter>
+                    <Border
+                      Grid.Column="2"
+                      Background="{DynamicResource BackgroundBrushDefault}"
+                      BorderBrush="{DynamicResource OutlineBrushDefault}"
+                      BorderThickness="2"
+                      CornerRadius="4"
+                      Margin="0,12,11,12">
+                      <WebView Name="DocumentViewer" Loaded="WebView_Loaded"></WebView>
+                    </Border>
+              </Grid>
+            <Label
+              x:Name="Tapestries"
+              IsVisible="False">
+              Tapestries
+            </Label>
+            <Label
+              x:Name="Tools"
+              IsVisible="False">
+              Tools
+            </Label>
+              <StackPanel
+                x:Name="Settings"
+                IsVisible="False"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+                <ToggleSwitch
+                  x:Name="DefaultThemeSwitch"
+                  OffContent="Off"
+                  OnContent="On"
+                  IsCheckedChanged="DefaultTheme_IsCheckedChanged"
+                  FontFamily="{StaticResource AmiRFont}"
+                  FontSize="22">
+                  Use Default Theme
+                </ToggleSwitch>
+                <ToggleSwitch
+                  x:Name="DarkModeSwitch"
+                  OffContent="Light"
+                  OnContent="Dark"
+                  IsCheckedChanged="DarkMode_OnIsCheckedChanged"
+                  FontFamily="{StaticResource AmiRFont}"
+                  FontSize="22">
+                  Theme
+                </ToggleSwitch>
+              </StackPanel>
+          </Grid>
+        </Border>
+      </Grid>
+    </Border>
+    <!-- End of Windows Layout -->
+    <views:MainView
+      IsVisible="False"/>
+  </Grid>
+</Window>
