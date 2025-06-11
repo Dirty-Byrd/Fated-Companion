@@ -3,7 +3,7 @@
         <a href="{{ item.link }}" {% if page.url == {{ item.shortlink }} %}style="color: red;"{% endif %}>
             {{ item.name }}
             {{ item.shortlink }}
-            {{ page.url }}"
+            {{ page.url }}
         </a>
     {% endfor %}
 </nav>
