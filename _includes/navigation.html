@@ -1,8 +1,8 @@
 <nav>
-  <a href="/Fated-Companion" {% if page.url == "/Fated-Companion" %}style="color: red;"{% endif %}>
+  <a href="/Fated-Companion" {% if page.url = "/Fated-Companion" %}style="color: red;"{% endif %}>
     Home
   </a>
-  <a href="/Fated-Companion/about" {% if page.url == "/Fated-Companion/about" %}style="color: red;"{% endif %}>
+  <a href="/Fated-Companion/about" {% if page.url = "/Fated-Companion/about" %}style="color: red;"{% endif %}>
     About
   </a>
 </nav>
