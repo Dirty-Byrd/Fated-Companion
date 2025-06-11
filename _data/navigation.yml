@@ -1,0 +1,6 @@
+- name: Home
+  link: /Fated-Companion/
+  shortlink: /
+- name: About
+  link: /Fated-Companion/about.html
+  shortlink: /about.html
