@@ -6,7 +6,7 @@
   </head>
   <body>
     {{ content }}
+    <p>{{ page.url }}</p>
     {% include navigation.html %}
-    <p>{{ page.url | absolute_url }}</p>
   </body>
 </html>
