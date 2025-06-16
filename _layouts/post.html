@@ -85,11 +85,61 @@ layout: default
 </style>
 
 <div class="sidenav">
-    <ul id="navlist">
+    <ul id="navlist">        
+        <li><span class="caret">Rules</span>
+            <ul class="nested">
+                {% assign rules = site.posts | where: 'parent', 'Rules' %}
+                {% for post in rules %}
+                <li>
+                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
         <li><span class="caret">Professions</span>
             <ul class="nested">
-                {% assign professions = site.posts | where: 'parent', Professions %}
+                {% assign professions = site.posts | where: 'parent', 'Professions' %}
                 {% for post in professions %}
+                <li>
+                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li><span class="caret">Species</span>
+            <ul class="nested">
+                {% assign species = site.posts | where: 'parent', 'Species' %}
+                {% for post in species %}
+                <li>
+                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li><span class="caret">Spells</span>
+            <ul class="nested">
+                {% assign spells = site.posts | where: 'parent', 'Spells' %}
+                {% for post in spells %}
+                <li>
+                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li><span class="caret">Items</span>
+            <ul class="nested">
+                {% assign items = site.posts | where: 'parent', 'Items' %}
+                {% for post in items %}
+                <li>
+                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li><span class="caret">Beastiary</span>
+            <ul class="nested">
+                {% assign beastiary = site.posts | where: 'parent', 'Beastiary' %}
+                {% for post in beastiary %}
                 <li>
                     <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
                 </li>
