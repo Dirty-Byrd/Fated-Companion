@@ -1,0 +1,96 @@
+---
+layout: default
+---
+<style>
+    .sidenav
+    {
+        position: fixed;
+        background-color: lightgray;
+        border-radius: 6px;
+        margin-top: 27px;
+        width: 160px;
+    }
+
+    .sidenav a
+    {
+        padding-right: 20px;
+    }
+
+    .main
+    {
+        margin-left: 160px;
+        padding: 0px 10px;
+    }
+
+    ul, #navlist
+    {
+        list-style-type: none;
+    }
+
+    #navlist
+    {
+        margin: 0px;
+        padding: 6px;
+    }
+
+    .caret
+    {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .caret::before
+    {
+        content:"\25B6";
+        color: black;
+        display: inline-block;
+        margin-right: 6px;
+    }
+
+    .caret-down::before
+    {
+        transform: rotate(90deg);
+    }
+
+    .nested
+    {
+        display: none;
+    }
+
+    .active
+    {
+        display: block;
+    }
+</style>
+
+<div class="sidenav">
+    <ul id="navlist">
+        <li><span class="caret">Professions</span>
+            <ul class="nested">
+                {% assign professions = site.posts | where: 'parent', Professions %}
+                {% for post in professions %}
+                <li>
+                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+    toggler[i].addEventListener("click", function() {
+        this.parentElement.querySelector(".nested").classList.toggle("active");
+        this.classList.toggle("caret-down");
+    });
+    } 
+</script>
+
+<div class="main">
+    <h1>{{page.title}}</h1>
+    {{ content }}
+</div>

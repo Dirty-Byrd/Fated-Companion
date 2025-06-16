@@ -3,9 +3,40 @@
     <head>
         <meta charset="utf-8">
         <title>{{ page.title }}</title>
+        <link rel="stylesheet" href="assets/css/styles.css">
     </head>
-    <body>
-        {% include navigation.html %}
+
+    <style>
+        .maincontent
+        {
+            padding-top: 30px;
+        }
+
+        nav
+        {
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            background-color: lightgray;
+            border-radius: 6px;
+            padding: 5px;
+        }
+
+        nav a
+        {
+            padding: 10px;
+        }
+    </style>
+
+    <nav>
+        {% for item in site.data.navigation %}
+            <a href="{{ item.link }}" {% if page.url == item.shortlink %}class="current"{% endif %}>
+                {{ item.name }}
+            </a>
+        {% endfor %}
+    </nav>
+
+    <div class="maincontent">
         {{ content }}
-    </body>
+    </div>
 </html>
