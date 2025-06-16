@@ -2,13 +2,18 @@
 layout: default
 ---
 <style>
+    .compTitle
+    {
+        text-align: center;
+    }
+
     .sidenav
     {
         position: fixed;
         background-color: lightgray;
         border-radius: 6px;
         margin-top: 27px;
-        width: 160px;
+        width: 20%;
     }
 
     .sidenav a
@@ -18,8 +23,24 @@ layout: default
 
     .main
     {
-        margin-left: 160px;
-        padding: 0px 10px;
+        width: 78%;
+        float: right;
+    }
+
+    @media screen and (max-width:800px)
+    {
+        .sidenav, .main
+        {
+            width: 100%;
+        }
+    }
+
+        @media screen and (max-width:800px)
+    {
+        .sidenav
+        {
+            position: relative;
+        }
     }
 
     ul, #navlist
@@ -91,6 +112,6 @@ layout: default
 </script>
 
 <div class="main">
-    <h1>{{page.title}}</h1>
+    <h1 class="compTitle">{{page.title}}</h1>
     {{ content }}
 </div>
