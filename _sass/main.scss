@@ -1,4 +1,80 @@
 .current 
 {
-    color: red;
+    background-color: gray;
+    color: white;
+}
+
+html, body
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+header
+{
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    font-size: 40px;
+    z-index: 1000;
+}
+
+header span
+{
+    margin-left: 10px;
+}
+
+.maincontent
+{
+    padding-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+nav
+{
+    margin-top: 5px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    border-radius: 6px;
+    padding: 5px;
+    height: fit-content;
+    width: fit-content;
+    z-index: 1001;
+}
+
+nav a
+{
+    font-size: 20px;
+    margin: 1px;
+    padding: 4px;
+    color: black;
+    background-color: lightgray;
+    text-decoration: none;
+    transition-duration: .2s;
+    border-radius: 2px;
+    min-width: none;
+}
+
+nav a:hover
+{
+    background-color: gray;
+    color: white;
+}
+
+nav a:active
+{
+    background-color: darkslategray;
+}
+
+@media screen and (max-width:800px)
+{
+    nav, header
+    {
+        position: relative;
+        text-align: center;
+    }
 }

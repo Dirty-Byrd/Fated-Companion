@@ -1,19 +1,92 @@
 ---
 layout: default
 ---
+
 <style>
-    .compTitle
+    html, body
     {
-        text-align: center;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .maincontent
+    {
+        padding-top: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    header
+    {
+        background-color: white;
+        border-bottom: 1px solid lightgray;
+        position: fixed;
+        height: 50px;
+        width: 100%;
+        font-size: 40px;
+        z-index: 1000;
+    }
+
+    header span
+    {
+        margin-left: 10px;
+    }
+
+    nav
+    {
+        margin-top: 5px;
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        border-radius: 6px;
+        padding: 5px;
+        height: fit-content;
+        width: fit-content;
+        z-index: 1001;
+    }
+
+    nav a
+    {
+        font-size: 20px;
+        margin: 1px;
+        padding: 4px;
+        color: black;
+        background-color: lightgray;
+        text-decoration: none;
+        transition-duration: .2s;
+        border-radius: 2px;
+        min-width: none;
+    }
+
+    nav a:hover
+    {
+        background-color: gray;
+        color: white;
+    }
+
+    nav a:active
+    {
+        background-color: darkslategray;
+    }
+
+    @media screen and (max-width:800px)
+    {
+        nav, header
+        {
+            position: relative;
+            text-align: center;
+        }
     }
 
     .sidenav
     {
         position: fixed;
-        background-color: lightgray;
-        border-radius: 6px;
-        margin-top: 27px;
-        width: 20%;
+        height: 100%;
+        background-color: white;
+        border-right: 1px solid lightgray;
+        margin-top: 20px;
+        margin-left: 0px;
+        width: 10%;
     }
 
     .sidenav a
@@ -23,21 +96,23 @@ layout: default
 
     .main
     {
-        width: 78%;
+        width: 88.5%;
         float: right;
+        margin-top: 3px;
     }
 
     @media screen and (max-width:800px)
     {
-        .sidenav, .main
+        .sidenav, .main, header
         {
-            width: 100%;
+            width: auto;
+            margin: 15px;
         }
     }
 
-        @media screen and (max-width:800px)
+    @media screen and (max-width:800px)
     {
-        .sidenav
+        .sidenav, header
         {
             position: relative;
         }
@@ -66,10 +141,12 @@ layout: default
         color: black;
         display: inline-block;
         margin-right: 6px;
+        transition-duration: 0.2s;
     }
 
     .caret-down::before
     {
+        transition-duration: 0.2s;
         transform: rotate(90deg);
     }
 
