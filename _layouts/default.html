@@ -8,11 +8,11 @@
     </head>
 
     <header>
-        <span>Fated: The Game</span>
+        <span><b>Fated: The Game</b></span>
     </header>
     <nav>
         {% for item in site.data.navigation %}
-            <a href="{{ item.link }}" {% if page.url == item.shortlink %}class="current"{% endif %}>{{ item.name }}</a>
+            <a href="{{ item.link }}">{{ item.name }}</a>
         {% endfor %}
     </nav>
 

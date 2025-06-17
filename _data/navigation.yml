@@ -1,9 +1,12 @@
 - name: Home
   link: /Fated-Companion/
   shortlink: /
-- name: About
-  link: /Fated-Companion/about.html
-  shortlink: /about.html
 - name: Compendium
   link: /Fated-Companion/compendium.html
   shortlink: /compendium.html
+- name: Tapestries
+  link: 
+  shortlink:
+- name: Tools
+  link:
+  shortlink:

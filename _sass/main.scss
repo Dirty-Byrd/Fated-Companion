@@ -8,17 +8,19 @@ html, body
 {
     margin: 0px;
     padding: 0px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 header
 {
     background-color: white;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 2px solid darkred;
     position: fixed;
-    height: 50px;
+    height: 40px;
     width: 100%;
-    font-size: 40px;
+    font-size: 24px;
     z-index: 1000;
+    padding-top: 10px;
 }
 
 header span
