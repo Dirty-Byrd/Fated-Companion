@@ -8,6 +8,15 @@ layout: default
     </head>
 
     <style>
+        .maincontent
+        {
+            background-color: rgb(43, 43, 43);
+            color: rgb(205, 205, 205);
+            overflow: auto;
+            height: calc(100vh - 83px);
+            padding-left: 0px;
+        }
+
         .caret
         {
             cursor: pointer;
@@ -27,7 +36,7 @@ layout: default
         .caret::before
         {
             content:"\25B6";
-            color: black;
+            color: rgb(205, 205, 205);
             display: inline-block;
             margin-right: 6px;
             transition-duration: 0.2s;
