@@ -121,12 +121,21 @@ nav a:active
 
 @media screen and (max-width:800px)
 {
-    .defaultcontainer, .maincontent, header
+    .defaultcontainer
     {
+        height: auto;
         position: relative;
     }
 }
 
+@media screen and (max-width:800px)
+{
+    .pagecontent, .maincontent
+    {
+        overflow-y: hidden;
+        height: auto;
+    }
+}
 // @media screen and (max-width:800px)
 // {
 //     .sidenav, .main
