@@ -4,19 +4,22 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{ page.title }}</title>
-        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="/Fated-Companion/assets/css/styles.css">
     </head>
 
-    <header>
-        <span><b>Fated: The Game</b></span>
-    </header>
-    <nav>
-        {% for item in site.data.navigation %}
-            <a href="{{ item.link }}">{{ item.name }}</a>
-        {% endfor %}
-    </nav>
+    <div class="defaultcontainer">
+        <header>
+            <span><b>Fated: The Game</b></span>
+        </header>    
 
-    <div class="maincontent">
-        {{ content }}
+        <nav>
+            {% for item in site.data.navigation %}
+                <a href="{{ item.link }}">{{ item.name }}</a>
+            {% endfor %}
+        </nav>
+    
+        <div class="maincontent">
+            {{ content }}
+        </div>
     </div>
 </html>

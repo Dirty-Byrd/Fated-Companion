@@ -1,284 +1,141 @@
 ---
 layout: default
 ---
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/Fated-Companion/assets/css/styles.css">
+    </head>
 
-<style>
-    html, body
-    {
-        margin: 0px;
-        padding: 0px;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    }
-
-    .maincontent
-    {
-        padding-top: 30px;
-        margin-left: 0px;
-        margin-right: 10px;
-    }
-
-    header
-    {
-        background-color: white;
-        border-bottom: 2px solid darkred;
-        position: fixed;
-        height: 40px;
-        width: 100%;
-        font-size: 24px;
-        z-index: 1000;
-        padding-top: 10px;
-    }
-
-    header span
-    {
-        margin-left: 10px;
-    }
-
-    nav
-    {
-        margin-top: 5px;
-        position: fixed;
-        left: 50%;
-        transform: translate(-50%, 0%);
-        border-radius: 6px;
-        padding: 5px;
-        height: fit-content;
-        width: fit-content;
-        z-index: 1001;
-    }
-
-    nav a
-    {
-        font-size: 20px;
-        margin: 1px;
-        padding: 4px;
-        color: black;
-        background-color: lightgray;
-        text-decoration: none;
-        transition-duration: .2s;
-        border-radius: 2px;
-        min-width: none;
-    }
-
-    nav a:hover
-    {
-        background-color: gray;
-        color: white;
-    }
-
-    nav a:active
-    {
-        background-color: darkslategray;
-    }
-
-    @media screen and (max-width:800px)
-    {
-        nav, header
+    <style>
+        .caret
         {
-            position: relative;
-            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            padding-left: 4px;
+            padding-right: 4px;
+            border-radius: 3px;
         }
-    }
 
-    .sidenav
-    {
-        position: relative;
-        float: left;
-        height:max-content;
-        background-color: white;
-        border-right: 2px solid darkred;
-        border-bottom: 2px solid darkred;
-        margin-top: 20px;
-        margin-left: 0px;
-        width: max-content;
-        border-bottom-right-radius: 3px;
-    }
-
-    .sidenav a
-    {
-        padding-right: 20px;
-    }
-
-
-
-    .main
-    {
-        width: 85%;
-        height: 100vh;
-        float: left;
-        margin-top: 3px;
-        margin-left: 10px;
-    }
-
-    @media screen and (max-width:800px)
-    {
-        .sidenav, .main, header
+        .caret:hover
         {
-            width: auto;
-            margin: 15px;
-            border-right: 0px;
-            border-bottom: 0px;
+            background-color: rgb(85, 85, 85);
+            color: white;
+            transition-duration: 0.2s;
         }
-    }
 
-    @media screen and (max-width:800px)
-    {
-        .sidenav, header
+        .caret::before
         {
-            position: relative;
+            content:"\25B6";
+            color: black;
+            display: inline-block;
+            margin-right: 6px;
+            transition-duration: 0.2s;
         }
-    }
 
-    ul, #navlist
-    {
-        list-style-type: none;
-    }
-
-    #navlist
-    {
-        margin: 0px;
-        padding: 6px;
-    }
-
-    .caret
-    {
-        cursor: pointer;
-        user-select: none;
-        padding-left: 4px;
-        padding-right: 4px;
-        border-radius: 3px;
-    }
-
-    .caret:hover
-    {
-        background-color: lightgray;
-    }
-
-    .caret::before
-    {
-        content:"\25B6";
-        color: black;
-        display: inline-block;
-        margin-right: 6px;
-        transition-duration: 0.2s;
-    }
-
-    .caret-down::before
-    {
-        transition-duration: 0.2s;
-        transform: rotate(90deg);
-    }
-
-    .nested
-    {
-        display: none;
-    }
-
-    .active
-    {
-        display: block;
-    }
-
-    .sidenav a
-    {
-        text-decoration: none;
-        color:darkred;
-        padding-left: 4px;
-        padding-right: 4px;
-        border-radius: 3px;
-    }
-
-    .sidenav a:hover
-    {
-        background-color: lightgray;
-    }
-
-    .currentcompendium
-    {
-        background-color: lightgray;
-    }
-</style>
-
-<div class="sidenav">
-    <ul id="navlist">        
-        <li><span class="caret">Rules</span>
-            <ul class="nested">
-                {% assign rules = site.posts | where: 'parent', 'Rules' %}
-                {% for post in rules %}
-                <li>
-                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-        <li><span class="caret">Professions</span>
-            <ul class="nested">
-                {% assign professions = site.posts | where: 'parent', 'Professions' %}
-                {% for post in professions %}
-                <li>
-                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-        <li><span class="caret">Species</span>
-            <ul class="nested">
-                {% assign species = site.posts | where: 'parent', 'Species' %}
-                {% for post in species %}
-                <li>
-                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-        <li><span class="caret">Spells</span>
-            <ul class="nested">
-                {% assign spells = site.posts | where: 'parent', 'Spells' %}
-                {% for post in spells %}
-                <li>
-                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-        <li><span class="caret">Items</span>
-            <ul class="nested">
-                {% assign items = site.posts | where: 'parent', 'Items' %}
-                {% for post in items %}
-                <li>
-                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-        <li><span class="caret">Beastiary</span>
-            <ul class="nested">
-                {% assign beastiary = site.posts | where: 'parent', 'Beastiary' %}
-                {% for post in beastiary %}
-                <li>
-                    <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-    </ul>
-</div>
-
-<script>
-    var toggler = document.getElementsByClassName("caret");
-    var i;
-
-    for (i = 0; i < toggler.length; i++) 
-    {
-        toggler[i].addEventListener("click", function() 
+        .caret-down::before
         {
-            this.parentElement.querySelector(".nested").classList.toggle("active");
-            this.classList.toggle("caret-down");
-        });
-    }
-</script>
+            transition-duration: 0.2s;
+            transform: rotate(90deg);
+        }
 
-<div class="main">
-    <h1 class="compTitle">{{page.title}}</h1>
-    {{ content }}
-</div>
+        .nested
+        {
+            display: none;
+        }
+
+        .active
+        {
+            display: block;
+        }
+    </style>
+
+    <div class="postcontainer">
+        <div class="sidenav">
+            <ul id="navlist">        
+                <li><span class="caret">Rules</span>
+                    <ul class="nested">
+                        {% assign rules = site.posts | where: 'parent', 'Rules' %}
+                        {% for post in rules %}
+                        <li>
+                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><span class="caret">Professions</span>
+                    <ul class="nested">
+                        {% assign professions = site.posts | where: 'parent', 'Professions' %}
+                        {% for post in professions %}
+                        <li>
+                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><span class="caret">Species</span>
+                    <ul class="nested">
+                        {% assign species = site.posts | where: 'parent', 'Species' %}
+                        {% for post in species %}
+                        <li>
+                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><span class="caret">Spells</span>
+                    <ul class="nested">
+                        {% assign spells = site.posts | where: 'parent', 'Spells' %}
+                        {% for post in spells %}
+                        <li>
+                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><span class="caret">Items</span>
+                    <ul class="nested">
+                        {% assign items = site.posts | where: 'parent', 'Items' %}
+                        {% for post in items %}
+                        <li>
+                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><span class="caret">Beastiary</span>
+                    <ul class="nested">
+                        {% assign beastiary = site.posts | where: 'parent', 'Beastiary' %}
+                        {% for post in beastiary %}
+                        <li>
+                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="maincontent">
+            <div class="pagecontent">
+            <h1 class="compTitle">{{page.title}}</h1>
+            {{ content }}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var toggler = document.getElementsByClassName("caret");
+        var i;
+
+        for (i = 0; i < toggler.length; i++) 
+        {
+            toggler[i].addEventListener("click", function() 
+            {
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            });
+        }
+    </script>
+</html>

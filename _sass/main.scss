@@ -1,7 +1,17 @@
-.current 
+.defaultcontainer 
 {
-    background-color: gray;
-    color: white;
+    display: flex;
+    //grid-template-columns: auto auto;
+    //grid-template-rows: auto auto auto;
+    flex-direction: column;
+    background-color: blue;
+    width: 100vw;
+    position: fixed;
+}
+
+.postcontainer
+{
+    display: flex;
 }
 
 html, body
@@ -13,14 +23,17 @@ html, body
 
 header
 {
-    background-color: white;
+    background-color: rgb(33, 33, 33);
+    color: rgb(205, 205, 205);
     border-bottom: 2px solid darkred;
-    position: fixed;
     height: 40px;
     width: 100%;
     font-size: 24px;
     z-index: 1000;
     padding-top: 10px;
+    //grid-column-start: 1;
+    //grid-column-end: 2;
+    //grid-row: 1;
 }
 
 header span
@@ -30,40 +43,45 @@ header span
 
 .maincontent
 {
-    padding-top: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
+    background-color: rgb(43, 43, 43);
+    color: rgb(205, 205, 205);
+    overflow: auto;
+    height: calc(100vh - 86px);
+}
+
+.pagecontent
+{
+    padding-left: 30px;
 }
 
 nav
 {
-    margin-top: 5px;
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    border-radius: 6px;
-    padding: 5px;
-    height: fit-content;
-    width: fit-content;
+    padding-top: 4px;
+    padding-bottom: 4px;
     z-index: 1001;
+    //grid-column-start: 1;
+    //grid-column-end: 2;
+    //grid-row: 2;
+    background-color: rgb(63, 63, 63);
+    border-bottom: 2px solid darkred;
 }
 
 nav a
 {
     font-size: 20px;
-    margin: 1px;
+    margin: -2px;
     padding: 4px;
-    color: black;
-    background-color: lightgray;
+    color: rgb(205, 205, 205);
+    background-color: rgb(63, 63, 63);
     text-decoration: none;
     transition-duration: .2s;
-    border-radius: 2px;
-    min-width: none;
+    border-left: 1px rgb(85, 85, 85) solid;
+    border-right: 1px rgb(85, 85, 85) solid;
 }
 
 nav a:hover
 {
-    background-color: gray;
+    background-color: rgb(85, 85, 85);
     color: white;
 }
 
@@ -79,4 +97,80 @@ nav a:active
         position: relative;
         text-align: center;
     }
+}
+
+.sidenav
+{
+    border-right: 2px solid darkred;
+    border-bottom: 2px solid darkred;
+    margin-left: 0px;
+    width: max-content;
+    background-color: rgb(63, 63, 63);  
+    color: rgb(205, 205, 205);
+    //grid-column: 1;
+    //grid-row: 3;
+}
+
+// @media screen and (max-width:800px)
+// {
+//     .sidenav, .main, header
+//     {
+//         width: auto;
+//     }
+// }
+
+@media screen and (max-width:800px)
+{
+    .defaultcontainer, .maincontent, header
+    {
+        position: relative;
+    }
+}
+
+// @media screen and (max-width:800px)
+// {
+//     .sidenav, .main
+//     {
+//         border-bottom: 0px;
+//         border-right: 0px;
+//         margin: 15px;
+//     }
+// }
+
+@media screen and (max-width:800px)
+{
+    .postcontainer
+    {
+        flex-direction: column;
+    }
+}
+
+ul, #navlist
+{
+    list-style-type: none;
+}
+
+#navlist
+{
+    margin: 0px;
+    padding: 6px;
+}
+
+.sidenav a
+{
+    text-decoration: none;
+    color:rgb(198, 0, 0);
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 3px;
+}
+
+.sidenav a:hover
+{
+    background-color: rgb(85, 85, 85);
+}
+
+.sidenav li
+{
+    white-space: nowrap;
 }
