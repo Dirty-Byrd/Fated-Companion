@@ -189,3 +189,20 @@ ul, #navlist
 {
     white-space: nowrap;
 }
+
+blockquote 
+{
+    border-radius: 6px;
+    background-color: rgb(30, 30, 30);
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+table, th, td
+{
+    background-color: rgb(30, 30, 30);
+    padding: 5px;
+    //border: 1px solid red;
+    border-collapse: collapse;
+}
