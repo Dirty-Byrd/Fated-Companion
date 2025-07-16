@@ -7,121 +7,10 @@ layout: default
         <link rel="stylesheet" href="/Fated-Companion/assets/css/styles.css">
     </head>
 
-    <style>
-        .caret
-        {
-            cursor: pointer;
-            user-select: none;
-            padding-left: 4px;
-            padding-right: 4px;
-            border-radius: 3px;
-        }
-
-        .caret:hover
-        {
-            background-color: rgb(85, 85, 85);
-            color: white;
-            transition-duration: 0.2s;
-        }
-
-        .caret::before
-        {
-            content:"\25B6";
-            color: rgb(205, 205, 205);
-            display: inline-block;
-            margin-right: 6px;
-            transition-duration: 0.2s;
-        }
-
-        .caret-down::before
-        {
-            transition-duration: 0.2s;
-            transform: rotate(90deg);
-        }
-
-        .nested
-        {
-            display: none;
-        }
-
-        .active
-        {
-            display: block;
-        }
-    </style>
-
-    <div class="postcontainer">
-        <div class="sidenav">
-            <ul id="navlist">        
-                <li><span class="caret">Rules</span>
-                    <ul class="nested">
-                        {% assign rules = site.posts | where: 'parent', 'Rules' %}
-                        {% for post in rules %}
-                        <li>
-                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                <li><span class="caret">Professions</span>
-                    <ul class="nested">
-                        {% assign professions = site.posts | where: 'parent', 'Professions' %}
-                        {% for post in professions %}
-                        <li>
-                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                <li><span class="caret">Species</span>
-                    <ul class="nested">
-                        {% assign species = site.posts | where: 'parent', 'Species' %}
-                        {% for post in species %}
-                        <li>
-                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                <li><span class="caret">Spells</span>
-                    <ul class="nested">
-                        {% assign spells = site.posts | where: 'parent', 'Spells' %}
-                        {% for post in spells %}
-                        <li>
-                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                <li><span class="caret">Items</span>
-                    <ul class="nested">
-                        {% assign items = site.posts | where: 'parent', 'Items' %}
-                        {% for post in items %}
-                        <li>
-                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                <li><span class="caret">Beastiary</span>
-                    <ul class="nested">
-                        {% assign beastiary = site.posts | where: 'parent', 'Beastiary' %}
-                        {% for post in beastiary %}
-                        <li>
-                            <a href="/Fated-Companion{{ post.url }}">{{post.title}}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-
-        <div class="maincontent">
-            <div class="pagecontent">
-            <h1 class="compTitle">{{page.title}}</h1>
-            {{ content }}
-            </div>
+    <div class="maincontent">
+        <div class="pagecontent">
+        <h1 class="compTitle">{{page.title}}</h1>
+        {{ content }}
         </div>
     </div>
 
@@ -137,5 +26,8 @@ layout: default
                 this.classList.toggle("caret-down");
             });
         }
+
+        document.getElementById("compnav").style.display = "block";
+        document.getElementById("navhr").style.display = "block";
     </script>
 </html>

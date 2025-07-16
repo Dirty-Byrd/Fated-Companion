@@ -59,27 +59,62 @@ header span
 
 nav
 {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    z-index: 1001;
-    //grid-column-start: 1;
-    //grid-column-end: 2;
-    //grid-row: 2;
-    background-color: rgb(38, 38, 38);
+    border-right: 1px rgb(85, 85, 85) solid;
     border-bottom: 1px rgb(85, 85, 85) solid;
+    margin-left: 0px;
+    background-color: rgb(38, 38, 38);  
+    color: rgb(205, 205, 205);
 }
 
 nav a
 {
+    display: block;
     font-size: 20px;
-    margin: -2px;
-    padding: 4px;
+    margin: 0px;
+    padding-left: 6px;
     color: rgb(205, 205, 205);
     background-color: rgb(38, 38, 38);
     text-decoration: none;
     transition-duration: .2s;
-    border-left: 1px rgb(85, 85, 85) solid;
-    border-right: 1px rgb(85, 85, 85) solid;
+}
+
+.mainnavigation ul
+{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.mainnavigation li
+{
+    display: block;
+}
+
+.navdivider
+{
+    display: none;
+}
+
+.compnavigation
+{
+    display: none;
+}
+
+.postlinks a
+{
+    text-decoration: none;
+    color:rgb(198, 0, 0);
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    border: 0px;
+}
+
+.postlinks a:hover
+{
+    background-color: rgb(85, 85, 85);
 }
 
 nav a:hover
@@ -101,26 +136,6 @@ nav a:active
         text-align: center;
     }
 }
-
-.sidenav
-{
-    border-right: 1px rgb(85, 85, 85) solid;
-    border-bottom: 1px rgb(85, 85, 85) solid;
-    margin-left: 0px;
-    width: max-content;
-    background-color: rgb(38, 38, 38);  
-    color: rgb(205, 205, 205);
-    //grid-column: 1;
-    //grid-row: 3;
-}
-
-// @media screen and (max-width:800px)
-// {
-//     .sidenav, .main, header
-//     {
-//         width: auto;
-//     }
-// }
 
 @media screen and (max-width:800px)
 {
@@ -169,23 +184,10 @@ ul, #navlist
 {
     margin: 0px;
     padding: 6px;
+    font-size: 18px;
 }
 
-.sidenav a
-{
-    text-decoration: none;
-    color:rgb(198, 0, 0);
-    padding-left: 4px;
-    padding-right: 4px;
-    border-radius: 3px;
-}
-
-.sidenav a:hover
-{
-    background-color: rgb(85, 85, 85);
-}
-
-.sidenav li
+#navlist li
 {
     white-space: nowrap;
 }
