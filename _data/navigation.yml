@@ -1,12 +1,12 @@
 - name: Home
-  link: /Fated-Companion/
+  link: /Severed-Fates-Companion/
   shortlink: /
 - name: Compendium
-  link: /Fated-Companion/compendium.html
+  link: /Severed-Fates-Companion/compendium.html
   shortlink: /compendium.html
 - name: Tapestries
   link: 
   shortlink:
 - name: Tools
-  link: /Fated-Companion/tools.html
+  link: /Severed-Fates-Companion/tools.html
   shortlink: /tools.html
