@@ -38,6 +38,11 @@ header
     //grid-row: 1;
 }
 
+.hideshownav
+{
+    display: none;
+}
+
 .headerhomebtn
 {
     color: white;
@@ -146,10 +151,37 @@ nav a:active
 
 @media screen and (max-width:800px)
 {
-    nav, header
+    header
     {
-        position: relative;
-        text-align: center;
+        position: fixed;
+    }
+
+    .hideshownav
+    {
+        display: inline-block;
+        margin-left: 30px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:800px)
+{
+    .mobileinactivenavbar 
+    {
+        position: fixed;
+        display: none;
+    }
+
+    .mobileactivenavbar
+    {
+        top: 38px;
+        position: fixed;
+        display: block;
+        overflow-y: scroll;
+        height: 80vh;
+        border-right: 3px rgb(85, 85, 85) solid;
+        border-bottom: 3px rgb(85, 85, 85) solid;
+        border-bottom-right-radius: 3px;
     }
 }
 
@@ -166,6 +198,7 @@ nav a:active
 {
     .pagecontent, .maincontent
     {
+        margin-top: 18px;
         overflow-y: hidden;
         width: auto;
         height: auto;
@@ -186,8 +219,8 @@ nav a:active
 {
     .postcontainer
     {
-        flex-direction: column;
-        align-items: center;
+        //flex-direction: column;
+        //align-items: left;
     }
 }
 

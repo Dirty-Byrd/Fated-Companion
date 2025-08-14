@@ -5,6 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{ page.title }}</title>
         <link rel="stylesheet" href="/Severed-Fates-Companion/assets/css/styles.css">
+        <script>
+            function toggleMobileNavBar()
+            {
+                var element = document.getElementById("navbar");
+                element.classList.toggle("mobileactivenavbar");
+            }
+        </script>
     </head>
 
         <style>
@@ -52,13 +59,14 @@
 
     <div class="defaultcontainer">
         <header>
+            <div class="hideshownav"><button type="button" onclick="toggleMobileNavBar()">=</button></div>
             <a href="/Severed-Fates-Companion/" class="headerhomebtn">
                 <span><b>Severed <span class="fates">Fates</span></b></span>
             </a>
         </header>    
 
         <div class="postcontainer">
-            <nav>
+            <nav class="mobileinactivenavbar" id="navbar">
                 <div class="mainnavigation">
                     <ul>
                         {% for item in site.data.navigation %}
