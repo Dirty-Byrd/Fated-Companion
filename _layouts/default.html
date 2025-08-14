@@ -52,7 +52,9 @@
 
     <div class="defaultcontainer">
         <header>
-            <span><b>Severed Fates</b></span>
+            <a href="/Severed-Fates-Companion/" class="headerhomebtn">
+                <span><b>Severed <span class="fates">Fates</span></b></span>
+            </a>
         </header>    
 
         <div class="postcontainer">
@@ -60,7 +62,7 @@
                 <div class="mainnavigation">
                     <ul>
                         {% for item in site.data.navigation %}
-                            <li><a href="{{ item.link }}" {% if page.url == item.shortlink %}style="background-color: rgb(85, 85, 85);color: white;"{% endif %}>{{ item.name }}</a></li>
+                            <li><a href="{{ item.link }}" {% if page.url == item.shortlink %}style="background-color: rgb(85, 85, 85);color: red;"{% endif %}>{{ item.name }}</a></li>
                         {% endfor %}
                     </ul>    
                 </div>

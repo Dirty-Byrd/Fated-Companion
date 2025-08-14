@@ -4,7 +4,7 @@
     //grid-template-columns: auto auto;
     //grid-template-rows: auto auto auto;
     flex-direction: column;
-    background-color: blue;
+    background-color: rgb(43, 43, 43);
     width: 100vw;
     position: fixed;
 }
@@ -38,9 +38,21 @@ header
     //grid-row: 1;
 }
 
+.headerhomebtn
+{
+    color: white;
+    text-decoration: none;
+}
+
+.fates
+{
+    color: red;
+    margin-left: 0px;
+}
+
 header span
 {
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .maincontent
@@ -64,14 +76,16 @@ nav
     margin-left: 0px;
     background-color: rgb(38, 38, 38);  
     color: rgb(205, 205, 205);
+    padding-top: 10px;
 }
 
 nav a
 {
     display: block;
-    font-size: 20px;
+    font-size: 25px;
     margin: 0px;
-    padding-left: 6px;
+    padding-left: 16px;
+    padding-right: 10px;
     color: rgb(205, 205, 205);
     background-color: rgb(38, 38, 38);
     text-decoration: none;
@@ -98,6 +112,7 @@ nav a
 .compnavigation
 {
     display: none;
+    padding-left: 10px;
 }
 
 .postlinks a
@@ -105,11 +120,12 @@ nav a
     text-decoration: none;
     color:rgb(198, 0, 0);
     padding-left: 4px;
-    padding-right: 4px;
+    padding-right: 10px;
     border-radius: 3px;
     margin-top: 1px;
     margin-bottom: 1px;
     border: 0px;
+    font-size: 20px;
 }
 
 .postlinks a:hover
