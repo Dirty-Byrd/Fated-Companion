@@ -28,7 +28,7 @@ header
     background-color: rgb(33, 33, 33);
     color: rgb(205, 205, 205);
     border-bottom: 1px rgb(85, 85, 85) solid;
-    height: 40px;
+    height: 42px;
     width: 100%;
     font-size: 24px;
     z-index: 1000;
@@ -41,6 +41,25 @@ header
 .hideshownav
 {
     display: none;
+    background-color: rgb(43, 43, 43);
+    border: 1px rgb(85, 85, 85) solid;
+    border-radius: 6px;
+    color: white;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: -5px;
+    margin-left: 6px;
+}
+
+.hideshownav:hover
+{
+    background-color: rgb(33, 33, 33);
+}
+
+.hideshownav:active
+{
+    background-color: rgb(71, 71, 71);
 }
 
 .headerhomebtn
@@ -123,14 +142,14 @@ nav a
 .postlinks a
 {
     text-decoration: none;
-    color:rgb(198, 0, 0);
+    color: rgb(205, 205, 205);
     padding-left: 4px;
     padding-right: 10px;
     border-radius: 3px;
     margin-top: 1px;
     margin-bottom: 1px;
     border: 0px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .postlinks a:hover
@@ -159,8 +178,6 @@ nav a:active
     .hideshownav
     {
         display: inline-block;
-        margin-left: 30px;
-        height: auto;
     }
 }
 
@@ -179,9 +196,6 @@ nav a:active
         display: block;
         overflow-y: scroll;
         height: 80vh;
-        border-right: 3px rgb(85, 85, 85) solid;
-        border-bottom: 3px rgb(85, 85, 85) solid;
-        border-bottom-right-radius: 3px;
     }
 }
 
